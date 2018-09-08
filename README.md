@@ -3,7 +3,7 @@ FALL_2018 PROJECT
 ## Team Members:
 Member 1
 * Name : Gummadi, Vineetha
-*ClassID: 15
+* ClassID: 15
 
 Member 2
 * Name : Kaza, Vidyullatha Lakshmi
