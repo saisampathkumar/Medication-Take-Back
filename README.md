@@ -2,17 +2,17 @@
 FALL_2018 PROJECT
 ## Team Members:
 Member 1
-* Name : Gummadi, Vineetha
+* NAME: Gummadi, Vineetha
 * ClassID: 15
 
 Member 2
-* Name : Kaza, Vidyullatha Lakshmi
+* NAME: Kaza, Vidyullatha Lakshmi
 * ClassID:26
 
 Member 3
-* Name: Raigiri, Sai Sampath Kumar
+* NAME: Raigiri, Sai Sampath Kumar
 * ClassID: 41
 
 Member 4
-* Name: Thotigar, Veeresha Mallikarjuna
+* NAME: Thotigar, Veeresha Mallikarjuna
 * ClassID: 53
