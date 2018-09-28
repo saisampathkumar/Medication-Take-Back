@@ -2,3 +2,4 @@
 *.xml
 src/.idea/src.iml
 src/node_modules/*
+src/node_modules/node_modules/*
