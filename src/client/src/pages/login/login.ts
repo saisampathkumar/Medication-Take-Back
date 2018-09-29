@@ -20,24 +20,31 @@ export class LoginPage {
 @ViewChild('password') pwd;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
+  
 signIn(){
-if ( this.uname.value=== null || this.pwd.value === null){
-      return Observable.throw("Please insert credentials");
+var validate = true
 
-}
-if(this.uname.value == "admin" && this.pwd.value == "admin")
+if(!(this.uname.value == "admin" && this.pwd.value == "admin"))
 {
+alert("Invalid Credentials")
+validate= false
+}
+
+if(this.uname.value == "" || this.pwd.value == ""){
+alert("Please enter the credentials")
+validate= false
+}
+
+
+if (validate == true){
 this.navCtrl.push(TabsPage)
 }
-else{
-alert("Invalid Credentials")
 }
-}
-
 
 register(){
 this.navCtrl.push(RegisterPage)
 }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
   }
