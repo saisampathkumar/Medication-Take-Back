@@ -15,5 +15,5 @@ logout(){
   this.navCtrl.push(LoginPage)
 
   }
-  
+
 }

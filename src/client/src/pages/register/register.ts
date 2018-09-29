@@ -1,8 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {HomePage} from '../home/home'
-import {RegisterPage} from '../register/register'
 import {LoginPage} from '../login/login'
+import {TabsPage} from '../tabs/tabs'
+
 /**
  * Generated class for the RegisterPage page.
  *
@@ -16,11 +17,11 @@ import {LoginPage} from '../login/login'
   templateUrl: 'register.html',
 })
 export class RegisterPage {
-@ViewChild('emailid') emailId;
-@ViewChild('lname') firstName;
-@ViewChild('fname') lastName;
+@ViewChild('username') emailId;
+@ViewChild('fname') firstName;
+@ViewChild('lname') lastName;
 @ViewChild('password') pwd;
-@ViewChild('confirmPassword') confirmPwd;
+@ViewChild('confirmPwd') confirmPwd;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
@@ -28,14 +29,29 @@ export class RegisterPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad RegisterPage');
   }
+  
 register(){
-if(this.pwd.value == this.confirmPwd.value )
+var validate = true
+
+if(this.emailId.value == "" || this.firstName.value == "" || this.lastName.value ==""|| this.pwd.value == "" || this.confirmPwd.value == "") 
 {
-this.navCtrl.push(LoginPage)
+alert("Fields should not be empty" )
+validate = false;
 }
-else
-alert("Enter all values")
+
+if(!(this.pwd.value == this.confirmPwd.value)) 
+{
+alert("Password Should Match" )
+validate = false;
 }
+
+if (validate == true){
+this.navCtrl.push(TabsPage)
+}
+
+}
+
+
 
 login(){
 this.navCtrl.push(LoginPage)
