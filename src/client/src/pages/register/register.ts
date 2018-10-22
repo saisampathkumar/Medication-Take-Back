@@ -46,7 +46,7 @@ validate = false;
 }
 
 if (validate == true){
-this.navCtrl.push(TabsPage)
+  this.navCtrl.push(LoginPage);
 }
 
 }
