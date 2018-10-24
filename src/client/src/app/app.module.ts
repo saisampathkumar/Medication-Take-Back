@@ -9,6 +9,10 @@ import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
+import { EventsHomePage } from '../pages/events-home/events-home';
+import { EventsRegisterPage } from '../pages/events-register/events-register';
+import { EventsJoinPage } from '../pages/events-join/events-join';
+import { EventPage } from '../pages/event/event';
 import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -21,6 +25,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AboutPage,
     ContactPage,
     HomePage,
+    EventsHomePage,
+    EventsRegisterPage,
+    EventsJoinPage,
+    EventPage,
     TabsPage
   ],
   imports: [
@@ -35,6 +43,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AboutPage,
     ContactPage,
     HomePage,
+    EventsHomePage,
+    EventsRegisterPage,
+    EventsJoinPage,
+    EventPage,
     TabsPage
   ],
   providers: [
