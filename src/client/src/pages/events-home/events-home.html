@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Events
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button clear icon-only (click)="joinEvent()">
+        <ion-icon name="addEvent" md="md-add"></ion-icon> Join
+      </button>
+      <button ion-button clear icon-only (click)="addEvent()">
+        <ion-icon name="addEvent" md="md-add-circle"></ion-icon> Create
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="card-background-page">
+
+  <ion-card (click)="event(4)">
+    <img src="https://share.kaiserpermanente.org/wp-content/uploads/2017/10/drug-take-back-day-feature-548x336.jpg"/>
+    <div class="card-title">Event A</div>
+    <div class="card-subtitle">Oct 10 2018</div>
+  </ion-card>
+
+  <ion-card (click)="event(1)">
+    <img src="https://share.kaiserpermanente.org/wp-content/uploads/2017/10/drug-take-back-day-feature-548x336.jpg"/>
+    <div class="card-title">Event B</div>
+    <div class="card-subtitle">Oct 12 2018</div>
+  </ion-card>
+
+  <ion-card (click)="event(2)">
+    <img src="https://share.kaiserpermanente.org/wp-content/uploads/2017/10/drug-take-back-day-feature-548x336.jpg"/>
+    <div class="card-title">Event C</div>
+    <div class="card-subtitle">Oct 22 2018</div>
+  </ion-card>
+
+  <ion-card (click)="event(3)">
+    <img src="https://share.kaiserpermanente.org/wp-content/uploads/2017/10/drug-take-back-day-feature-548x336.jpg"/>
+    <div class="card-title">Event D</div>
+    <div class="card-subtitle">Nov 04 2018</div>
+  </ion-card>
+
+</ion-content>
