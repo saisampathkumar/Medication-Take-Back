@@ -8,9 +8,9 @@ var app = express();
 var cors = require('cors');
 
 //initializing schema
-require('./models/drug');
-require('./models/events');
-require('./models/users');
+require('./model/drug');
+require('./model/events');
+require('./model/users');
 //connection for DB
 var db_promise = db.connect(db_string,{ useNewUrlParser: true });
 db_promise.then((data) => {
