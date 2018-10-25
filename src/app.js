@@ -3,12 +3,21 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-
+const db = require('mongoose'),db_string = 'mongodb://localhost:27017/medication_take_back';
 var app = express();
+var cors = require('cors');
 
+//initializing schema
+require('./model/drug');
+require('./model/events');
+require('./model/users');
+//connection for DB
+var db_promise = db.connect(db_string,{ useNewUrlParser: true });
+db_promise.then((data) => {
+    console.log("Database connection is successfull !");
+}).catch(reason => {
+    console.log("Database connection is unsuccessfull ! : "+reason.message);
+})
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -18,11 +27,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'dist')));
+app.use(cors());
 
-// app.use('/', indexRouter);
-// app.use('/users', usersRouter);
-//Rest API's
-require('./controllers/UMS/index')(app);
+// Rest APIs
+require('./controllers/drug')(app, db);
+require('./controllers/events')(app, db);
+require('./controllers/users')(app, db);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
