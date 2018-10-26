@@ -30,8 +30,13 @@ export class EventsHomePage {
   joinEvent(){
     this.navCtrl.push(EventsJoinPage);
   }
-  event(ID:string){
-    this.navCtrl.push(EventPage,{id:ID});
+  event(ID:string,sdate:Date,adrsOne:string,zip:number){
+    this.navCtrl.push(EventPage,{
+      id:ID,
+      sdate:sdate,
+      adrsOne:adrsOne,
+      zip:zip
+    });
   }
   loadevents(name:string){
     this.url = 'http://127.0.0.1:3000/events/search/users?user=true&searchtext='+name;
@@ -39,7 +44,6 @@ export class EventsHomePage {
       .subscribe(
         (res:any)=>{
           this.result = res.data;
-          console.log(this.result);
         }
       )
   }

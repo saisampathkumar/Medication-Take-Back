@@ -5,10 +5,10 @@ module.exports = function (app, db) {
     //api to search drug details
     app.get('/drug/search',(req,res)=>{
         let search_text = req.query.searchtext;
-        console.log(search_text)
-        let query = {};
-        query = {name:search_text}
-        drug_model.find(query).exec((err, drug) => {
+        let query1 = {"name":{ $regex: search_text, $options: 'i' }};
+        let query2 = {"description":{ $regex: search_text, $options: 'i' }};
+        let mainQuery = {$or:[query1,query2]};
+        drug_model.find(mainQuery).exec((err, drug) => {
             if (!err) {
                 res.send({
                     result: "Success",

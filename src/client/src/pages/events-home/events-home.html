@@ -20,7 +20,7 @@
 
 <ion-content class="card-background-page">
   <div *ngFor="let event_obj of result">
-    <ion-card (click)="event(event_obj.eventName)">
+    <ion-card (click)="event(event_obj.eventName,event_obj.eventStartDate,event_obj.address_city,event_obj.address_zipcode)">
       <img src="https://share.kaiserpermanente.org/wp-content/uploads/2017/10/drug-take-back-day-feature-548x336.jpg"/>
       <div class="card-title">{{event_obj.eventName}}</div>
       <div class="card-subtitle">{{event_obj.eventStartDate | date:'short'}}</div>

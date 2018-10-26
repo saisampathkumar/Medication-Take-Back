@@ -3,8 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler, NavController, NavParams } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { Camera } from '@ionic-native/camera';
-import { HttpClientModule } from '@angular/common/http';
-
 import { AboutPage } from '../pages/about/about';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
@@ -28,7 +26,8 @@ import { AngularFireModule } from "angularfire2";
 // Initialize Firebase
 export const firebaseConfig =
 {
-     
+  // insert config here
+  
 };
 @NgModule({
   declarations: [
