@@ -58,4 +58,22 @@ module.exports = function (app, db) {
             }
         })
     });
+    //api to update event details
+    app.put('/event/update/users',(req,res)=>{
+        let events_info = req.body;
+        events_model.updateOne({'eventName':events_info.event_name},{$push:{'users_list':events_info.user}},(err, events_res) => {
+            if (!err) {
+                res.send({
+                    result: "Success",
+                    message: "Details updated successfully"
+                });
+            } else {
+                res.status(400).send({
+                    result: "Failure",
+                    message: "Error in updating event",
+                    error: err.message
+                });
+            }
+        })
+    });
 };
