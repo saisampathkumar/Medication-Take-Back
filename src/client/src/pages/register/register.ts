@@ -3,7 +3,9 @@ import { IonicPage, NavController } from 'ionic-angular';
 import {LoginPage} from '../login/login'
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+//firebase
+import {AngularFireAuth} from "angularfire2/auth";
+import {AngularFireDatabase} from "angularfire2/database";
 @IonicPage()
 @Component({
   selector: 'page-register',
@@ -17,11 +19,7 @@ export class RegisterPage {
 @ViewChild('confirmPwd') confirmPwd;
   public url:string;
   public message:Observable<any>;
-  constructor(public navCtrl: NavController, private http: HttpClient) {
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad RegisterPage');
+  constructor(public navCtrl: NavController, private http: HttpClient,private firebase: AngularFireAuth,public fireDatabase: AngularFireDatabase) {
   }
   
   register(){
@@ -41,17 +39,23 @@ export class RegisterPage {
 
     if (validate == true){
       this.url = 'http://127.0.0.1:3000/users/create';
-      this.http.post(this.url,{
-        email:this.emailId.value,
-        firstName:this.firstName.value,
-        lastName:this.lastName.value
-      }).subscribe(
-        (res:any)=>{
-          this.message = res.message;
-          alert(this.message);
-          this.navCtrl.push(LoginPage);
-        }
-      )
+      this.firebase.auth.createUserWithEmailAndPassword(this.emailId.value, this.pwd.value).then(data =>{
+          console.log("Got data from Firebase: ", data);
+          this.http.post(this.url,{
+            email:this.emailId.value,
+            firstName:this.firstName.value,
+            lastName:this.lastName.value
+          }).subscribe(
+            (res:any)=>{
+              this.message = res.message;
+              alert(this.message);
+              this.navCtrl.push(LoginPage);
+            }
+          )
+        }).catch(error =>{
+          console.log("error in registration : ", error);
+        });
+      
     }
   }
   login(){

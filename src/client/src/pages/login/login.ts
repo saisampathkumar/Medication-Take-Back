@@ -1,16 +1,11 @@
 import { Component,ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {HomePage} from '../home/home'
+import { NavController, NavParams } from 'ionic-angular';
 import {RegisterPage} from '../register/register'
 import {TabsPage} from '../tabs/tabs'
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+//authDomain
+import { AngularFireAuth } from "angularfire2/auth";
+import { auth } from 'firebase/app';
 
-@IonicPage()
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
@@ -18,35 +13,29 @@ import {TabsPage} from '../tabs/tabs'
 export class LoginPage {
 @ViewChild('username') uname;
 @ViewChild('password') pwd;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private firebase: AngularFireAuth) {
   }
   
-signIn(){
-var validate = true
+  signIn(){
+    var validate = true
 
-if(!(this.uname.value == "admin" && this.pwd.value == "admin"))
-{
-alert("Invalid Credentials")
-validate= false
-}
+    if(this.uname.value == "" || this.pwd.value == ""){
+      alert("Please enter the credentials")
+      validate= false
+    }
+    if (validate == true){
+      this.firebase.auth.signInWithEmailAndPassword(this.uname.value, this.pwd.value).then(data => {
+          console.log("Sign in successful");
+          this.navCtrl.push(TabsPage);
+      }).catch(error => {
+        console.log("error in authentication : ", error);
+        console.log(error.message);
+      });
+    }
+  }
 
-if(this.uname.value == "" || this.pwd.value == ""){
-alert("Please enter the credentials")
-validate= false
-}
-
-
-if (validate == true){
-this.navCtrl.push(TabsPage)
-}
-}
-
-register(){
-this.navCtrl.push(RegisterPage)
-}
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+  register(){
+  this.navCtrl.push(RegisterPage)
   }
 
 }

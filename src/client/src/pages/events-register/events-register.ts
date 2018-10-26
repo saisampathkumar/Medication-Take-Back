@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+//firebase
+import {AngularFireAuth} from "angularfire2/auth";
 
 @Component({
   selector: 'page-events-register',
@@ -21,9 +23,12 @@ export class EventsRegisterPage {
   public url:string;
   public message:Observable<any>;
   public userlist:string[];
-  constructor(public navCtrl: NavController,private http: HttpClient) {
-    this.created_by = 'admin';
-    this.userlist = [this.created_by];
+  constructor(public navCtrl: NavController,private http: HttpClient,private afAuth: AngularFireAuth) {
+    this.afAuth.authState.subscribe(user => {
+      if(user) this.created_by = user.email;
+      else this.created_by = 'admin';
+      this.userlist = [this.created_by];
+    })
   }
   createEvent(){
     this.url = 'http://127.0.0.1:3000/event/create';
@@ -43,6 +48,7 @@ export class EventsRegisterPage {
         (res:any)=>{
           this.message = res.message;
           alert(this.message);
+          this.navCtrl.pop();
           console.log(this.message);
         }
       )

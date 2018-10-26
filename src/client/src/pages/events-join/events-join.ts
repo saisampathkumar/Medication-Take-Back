@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+//firebase
+import {AngularFireAuth} from "angularfire2/auth";
 @Component({
   selector: 'page-events-join',
   templateUrl: 'events-join.html',
@@ -12,7 +13,12 @@ export class EventsJoinPage {
   public url:string;
   public result:Observable<any>;
   public message:Observable<any>;
-  constructor(public navCtrl: NavController,private http: HttpClient) {
+  constructor(public navCtrl: NavController,private http: HttpClient,private afAuth: AngularFireAuth) {
+    this.afAuth.authState.subscribe(user => {
+      if(user) this.created_by = user.email;
+      else this.created_by = 'admin';
+      this.loadevents(this.created_by);
+    })
   }
   loadevents(name:string){
     this.url = 'http://127.0.0.1:3000/events/search/users?user=false&searchtext='+name;
@@ -37,9 +43,5 @@ export class EventsJoinPage {
           alert(this.message);
         }
       )
-  }
-  ngOnInit() {
-    this.created_by = 'sampath';
-    this.loadevents(this.created_by);
   }
 }

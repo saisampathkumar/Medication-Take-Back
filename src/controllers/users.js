@@ -26,43 +26,62 @@ module.exports = function (app, db) {
     //api to create user details
     app.post('/users/create',(req,res) => {
         let users_info = req.body;
-        let users = new users_model({
-            user_id:getNextSequenceValue("userid"),
-            email_id:users_info.email,
-            first_name:users_info.firstName,
-            last_name:users_info.lastName,
-            created_on:new Date(),
-            updated_on:new Date()
-        });
-        users.save((err, users_res) => {
-            if (!err) {
-                res.send({
-                    result: "Success",
-                    message: "Details saved successfully"
-                });
-            } else {
-                res.status(400).send({
-                    result: "Failure",
-                    message: "Error in creating user",
-                    error: err.message
-                });
-            }
-        })
-    });
-    function getNextSequenceValue(sequenceName){
-        users_seq_model.findOneAndUpdate({ _id : sequenceName },{$inc:{sequence_value:1}},{new:true,useFindAndModify:false},(err,item) => {
-                if(err) throw err;
-                console.log(item);
-                if(item){
-                    let seq = new users_seq_model({_id:"userid",sequence_value:1});
-                    seq.save((err,obj)=>{
-                        if(err) throw err;
-                        console.log('obj',obj);
-                        return obj;
+        users_seq_model.findOneAndUpdate({ seq_id : "userid" },{$inc:{sequence_value:1}},{new:true,useFindAndModify:false},(err,item) => {
+            if(err) throw err;
+            if(!item){
+                let seq = new users_seq_model({seq_id:"userid",sequence_value:1});
+                seq.save((err,obj)=>{
+                    if(err) throw err;
+                    console.log(obj);
+                    let users = new users_model({
+                        user_id:obj.sequence_value,
+                        email_id:users_info.email,
+                        first_name:users_info.firstName,
+                        last_name:users_info.lastName,
+                        created_on:new Date(),
+                        updated_on:new Date()
+                    });
+                    users.save((err, users_res) => {
+                        if (!err) {
+                            res.send({
+                                result: "Success",
+                                message: "Details saved successfully"
+                            });
+                        } else {
+                            res.status(400).send({
+                                result: "Failure",
+                                message: "Error in creating user",
+                                error: err.message
+                            });
+                        }
                     })
-                }else{
-                    return item;
-                }
-            });
-    }
+                })
+            }else{
+                console.log(item)
+                let users = new users_model({
+                    user_id:item.sequence_value,
+                    email_id:users_info.email,
+                    first_name:users_info.firstName,
+                    last_name:users_info.lastName,
+                    created_on:new Date(),
+                    updated_on:new Date()
+                });
+                users.save((err, users_res) => {
+                    if (!err) {
+                        res.send({
+                            result: "Success",
+                            message: "Details saved successfully"
+                        });
+                    } else {
+                        res.status(400).send({
+                            result: "Failure",
+                            message: "Error in creating user",
+                            error: err.message
+                        });
+                    }
+                })
+            }
+        });
+
+    });
 };
