@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController,NavParams  } from 'ionic-angular';
+
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({
   selector: 'page-event',
@@ -28,8 +29,12 @@ export class EventPage {
   public quantityCollected: String;
   result:Observable<any>;
   message: string;
-
-  constructor(public navCtrl: NavController,public params:NavParams, private http: HttpClient) {
+  public created_by:string;
+  constructor(public navCtrl: NavController,public params:NavParams,private afAuth: AngularFireAuth) {
+    this.afAuth.authState.subscribe(user => {
+      if(user) this.created_by = user.email;
+      else this.created_by = 'admin';
+    })
     this.eventId = params.get('id');
     this.eventName =  this.eventId;
     console.log(this.eventId);  

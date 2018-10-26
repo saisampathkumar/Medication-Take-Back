@@ -4,6 +4,9 @@
       Events
     </ion-title>
     <ion-buttons end>
+      <button ion-button clear icon-only (click)="refresh()">
+          <ion-icon name="addEvent" md="md-refresh"></ion-icon>
+        </button>
       <button ion-button clear icon-only (click)="joinEvent()">
         <ion-icon name="addEvent" md="md-add"></ion-icon> Join
       </button>
@@ -16,29 +19,11 @@
 
 
 <ion-content class="card-background-page">
-
-  <ion-card (click)="event(4)">
-    <img src="https://share.kaiserpermanente.org/wp-content/uploads/2017/10/drug-take-back-day-feature-548x336.jpg"/>
-    <div class="card-title">Event A</div>
-    <div class="card-subtitle">Oct 10 2018</div>
-  </ion-card>
-
-  <ion-card (click)="event(1)">
-    <img src="https://share.kaiserpermanente.org/wp-content/uploads/2017/10/drug-take-back-day-feature-548x336.jpg"/>
-    <div class="card-title">Event B</div>
-    <div class="card-subtitle">Oct 12 2018</div>
-  </ion-card>
-
-  <ion-card (click)="event(2)">
-    <img src="https://share.kaiserpermanente.org/wp-content/uploads/2017/10/drug-take-back-day-feature-548x336.jpg"/>
-    <div class="card-title">Event C</div>
-    <div class="card-subtitle">Oct 22 2018</div>
-  </ion-card>
-
-  <ion-card (click)="event(3)">
-    <img src="https://share.kaiserpermanente.org/wp-content/uploads/2017/10/drug-take-back-day-feature-548x336.jpg"/>
-    <div class="card-title">Event D</div>
-    <div class="card-subtitle">Nov 04 2018</div>
-  </ion-card>
-
+  <div *ngFor="let event_obj of result">
+    <ion-card (click)="event(event_obj.eventName)">
+      <img src="https://share.kaiserpermanente.org/wp-content/uploads/2017/10/drug-take-back-day-feature-548x336.jpg"/>
+      <div class="card-title">{{event_obj.eventName}}</div>
+      <div class="card-subtitle">{{event_obj.eventStartDate | date:'short'}}</div>
+    </ion-card>
+  </div>
 </ion-content>

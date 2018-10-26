@@ -11,6 +11,7 @@ var cors = require('cors');
 require('./model/drug');
 require('./model/events');
 require('./model/users');
+require('./model/users_seq');
 //connection for DB
 var db_promise = db.connect(db_string,{ useNewUrlParser: true });
 db_promise.then((data) => {
