@@ -13,10 +13,22 @@ import { EventsHomePage } from '../pages/events-home/events-home';
 import { EventsRegisterPage } from '../pages/events-register/events-register';
 import { EventsJoinPage } from '../pages/events-join/events-join';
 import { EventPage } from '../pages/event/event';
+import { ReportsPage } from '../pages/reports/reports';
 import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
+//firebase
+import { AngularFireAuthModule } from "angularfire2/auth";
+import { AngularFireDatabaseModule } from "angularfire2/database";
+import { AngularFireModule } from "angularfire2";
+// Initialize Firebase
+export const firebaseConfig =
+{
+     
+};
 @NgModule({
   declarations: [
     MyApp,
@@ -29,10 +41,16 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     EventsRegisterPage,
     EventsJoinPage,
     EventPage,
+    ReportsPage,
     TabsPage
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -47,6 +65,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     EventsRegisterPage,
     EventsJoinPage,
     EventPage,
+    ReportsPage,
     TabsPage
   ],
   providers: [
