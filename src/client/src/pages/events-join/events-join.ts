@@ -4,11 +4,38 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 //firebase
 import {AngularFireAuth} from "angularfire2/auth";
+import { MbscFormOptions } from '@mobiscroll/angular';
+import { ViewChild } from '@angular/core';
+
 @Component({
+
   selector: 'page-events-join',
   templateUrl: 'events-join.html',
+
 })
 export class EventsJoinPage {
+  
+  @ViewChild('run1')
+  r1: any;
+  @ViewChild('run2')
+  r2: any;
+  @ViewChild('run3')
+  r3: any;
+
+  formSettings: MbscFormOptions = {
+    theme: 'ios'
+}
+
+closeAll() {
+  this.r1.instance.hide();
+  this.r2.instance.hide();
+  this.r3.instance.hide();
+}
+
+toggleFirst() {
+  this.r1.instance.toggle();
+}
+
   public created_by:string;
   public url:string;
   public result:Observable<any>;

@@ -17,7 +17,7 @@
      <ion-row class="logo-row">
     <ion-col></ion-col>
     <ion-col width-67>
-<img src="https://share.kaiserpermanente.org/wp-content/uploads/2017/10/drug-take-back-day-feature-548x336.jpg" style="width: 300px;height: 200px;"/>    </ion-col>
+<img src="http://www.shim-icacs2018.org/key4register/images/client/592/images/Icones/signup-icon.png"/>    </ion-col>
     <ion-col></ion-col>
   </ion-row>
   <div class="login-box">
@@ -25,30 +25,35 @@
     <ion-list >
             
             <ion-item>
-              <ion-input  type="text" placeholder="Email Id"  #username ></ion-input>
+              <ion-label floating>EMail Id</ion-label>
+              <ion-input  type="text"  #username ></ion-input>
             </ion-item>
             
             <ion-item>
-              <ion-input  type="text" placeholder="First Name" #fname ></ion-input>
+              <ion-label floating>First Name</ion-label>
+              <ion-input  type="text" #fname ></ion-input>
             </ion-item>
             <ion-item>
-              <ion-input  type="text" placeholder="Last Name" #lname ></ion-input>
-            </ion-item>
-        
-            <ion-item>
-              <ion-input  type="password" placeholder="Password" #password ></ion-input>
+              <ion-label floating>Last Name</ion-label>
+              <ion-input  type="text" #lname ></ion-input>
             </ion-item>
         
             <ion-item>
-              <ion-input  type="password" placeholder="Confirm Password" #confirmPwd ></ion-input>
+              <ion-label floating>Password</ion-label>
+              <ion-input  type="password" #password ></ion-input>
+            </ion-item>
+        
+            <ion-item>
+              <ion-label floating>Confirm Password</ion-label>
+              <ion-input  type="password"  #confirmPwd ></ion-input>
             </ion-item>
           </ion-list>
 
     </div>
     <div id="homebuttons">
 
-    <button ion-button   type="submit" (click)="register()">Register</button>
-    <button ion-button   type="submit" (click)="login()">Login</button></div>
+    <button ion-button   type="submit" (click)="register()" round>Register</button>
+    <button ion-button   type="submit" (click)="login()" round>Login</button></div>
 
 
 

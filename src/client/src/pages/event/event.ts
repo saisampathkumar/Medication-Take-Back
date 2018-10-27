@@ -4,12 +4,20 @@ import { NavController,NavParams  } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AngularFireAuth } from 'angularfire2/auth';
+import {BarcodeScanner,BarcodeScannerOptions} from '@ionic-native/barcode-scanner';
+import { AlertController } from 'ionic-angular';
+
 
 @Component({
   selector: 'page-event',
   templateUrl: 'event.html',
 })
 export class EventPage {
+
+  options: BarcodeScannerOptions;
+  encodeText: string='';
+  encodedData:any={};
+  scannedData:any={};
 
   public eventId:Number;
   public eventName:Number;
@@ -30,7 +38,8 @@ export class EventPage {
   result:Observable<any>;
   message: string;
   public created_by:string;
-  constructor(public navCtrl: NavController,public params:NavParams,private afAuth: AngularFireAuth,private http: HttpClient) {
+  constructor(public navCtrl: NavController, private alert: AlertController,
+    public scanner:BarcodeScanner  ,public params:NavParams,private afAuth: AngularFireAuth,private http: HttpClient) {
     this.afAuth.authState.subscribe(user => {
       if(user) this.created_by = user.email;
       else this.created_by = 'admin';
@@ -45,6 +54,26 @@ export class EventPage {
     return this.isReadonly;   //return true/false 
   }
   
+  scan(){
+    this.options={
+      prompt: 'scan your barcode'
+    }
+      this.scanner.scan(this.options).then((data)=>{
+        this.scannedData=data;
+      },(err)=>{
+        this.showAlert(err);
+      })
+  }
+
+  showAlert(message) {
+    let alert = this.alert.create({
+      title: 'Error',
+      subTitle: message,
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+
 detect(){
 if (this.myInput != ""){
     this.url = 'http://127.0.0.1:3000/drug/search?searchtext='+this.myInput;
@@ -53,7 +82,7 @@ if (this.myInput != ""){
         (res:any)=>{
           this.result = res.data;
           console.log(this.result)
-          if(this.result.length>0){
+          if(this.result){
             this.drugName = this.result[0].name?this.result[0].name:'';
             this.drugDescription = this.result[0].description?this.result[0].description:'';
             this.classificationClass = this.result[0].classification?(this.result[0].classification.class?this.result[0].classification.class:''):'';

@@ -18,12 +18,45 @@
 </ion-header>
 
 
-<ion-content class="card-background-page">
-  <div *ngFor="let event_obj of result">
-    <ion-card (click)="event(event_obj.eventName,event_obj.eventStartDate,event_obj.address_city,event_obj.address_zipcode)">
-      <img src="https://share.kaiserpermanente.org/wp-content/uploads/2017/10/drug-take-back-day-feature-548x336.jpg"/>
-      <div class="card-title">{{event_obj.eventName}}</div>
-      <div class="card-subtitle">{{event_obj.eventStartDate | date:'short'}}</div>
+<ion-content class="card-background-page" padding>
+
+  <div *ngFor="let event_obj of result" style="width:100%">
+
+  <ion-card  >
+
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="https://www.aegon.co.uk/content/dam/ukpaw/advisers-login.svg">
+        </ion-avatar>
+        <h2>{{event_obj.eventName}}</h2>
+        <p>{{event_obj.eventStartDate | date:'short'}}</p>
+      </ion-item>
+    
+      <img (click)="event(event_obj.eventName,event_obj.eventStartDate,event_obj.address_city,event_obj.address_zipcode)" src="https://images.pexels.com/photos/415825/pexels-photo-415825.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=350">
+    
+      <ion-card-content>
+        <p>
+        </p>
+      </ion-card-content>
+    
+      <ion-row>
+        <ion-col >
+          <ion-item>
+            <button ion-button icon-start clear small >
+              <ion-icon name="chatbubbles"></ion-icon>
+              <div>chat</div>
+            </button>
+          </ion-item>
+        </ion-col>
+        <ion-col  >
+            <ion-item style="width:100%; float: right">
+              <button  ion-button icon-start clear small end>
+                <ion-icon name="more" ></ion-icon>
+                <p>details </p>
+              </button>
+          </ion-item>
+        </ion-col>
+      </ion-row>
     </ion-card>
-  </div>
+    </div>
 </ion-content>
