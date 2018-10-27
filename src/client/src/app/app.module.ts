@@ -1,3 +1,4 @@
+import { MbscModule } from '@mobiscroll/angular';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler, NavController, NavParams } from 'ionic-angular';
@@ -23,12 +24,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { AngularFireAuthModule } from "angularfire2/auth";
 import { AngularFireDatabaseModule } from "angularfire2/database";
 import { AngularFireModule } from "angularfire2";
+
+//barcodescanner
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+
 // Initialize Firebase
 export const firebaseConfig =
 {
   // insert config here
   
 };
+
 @NgModule({
   declarations: [
     MyApp,
@@ -44,7 +50,8 @@ export const firebaseConfig =
     ReportsPage,
     TabsPage
   ],
-  imports: [
+  imports: [ 
+    MbscModule, 
     BrowserModule,
     FormsModule,
     HttpClientModule,
@@ -70,7 +77,9 @@ export const firebaseConfig =
   ],
   providers: [
     StatusBar,
-    SplashScreen,Camera,
+    SplashScreen,
+    Camera, 
+    BarcodeScanner,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

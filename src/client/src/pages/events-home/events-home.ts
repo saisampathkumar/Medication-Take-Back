@@ -11,9 +11,13 @@ import { AngularFireAuth } from 'angularfire2/auth';
   templateUrl: 'events-home.html',
 })
 export class EventsHomePage {
+  
+  public tap: number = 2;
+  public like: number = 11;
   public created_by:string;
   public url:string;
   public result:Observable<any>;
+
   constructor(public navCtrl: NavController,private http: HttpClient,private afAuth: AngularFireAuth) {
     this.afAuth.authState.subscribe(user => {
       if(user) this.created_by = user.email;
@@ -47,8 +51,13 @@ export class EventsHomePage {
         }
       )
   }
-  // ngOnInit() {
-    
-    
-  // }
+  tapEvent(e) {
+    this.tap++
+  }
+
+  likeEvent(e){
+    this.like++
+  }
+
 }
+
