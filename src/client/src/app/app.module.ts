@@ -26,8 +26,13 @@ import { AngularFireModule } from "angularfire2";
 // Initialize Firebase
 export const firebaseConfig =
 {
-  // insert config here
-  
+  // insert config here  
+    apiKey: "AIzaSyBljgWZHFL7h2Q0OCQj9mYo2QiDiAl0J4Y",
+    authDomain: "ioniclogin-624b9.firebaseapp.com",
+    databaseURL: "https://ioniclogin-624b9.firebaseio.com",
+    projectId: "ioniclogin-624b9",
+    storageBucket: "ioniclogin-624b9.appspot.com",
+    messagingSenderId: "122241974989"    
 };
 @NgModule({
   declarations: [
@@ -48,7 +53,7 @@ export const firebaseConfig =
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(firebaseConfig),    
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     IonicModule.forRoot(MyApp)
