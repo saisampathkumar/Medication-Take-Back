@@ -27,8 +27,6 @@ module.exports = function (app, db) {
     //api to create Product details
     app.post('/product/create',(req,res) => {
         let product_info = req.body;
-        console.log(product_info)
-        console.log("hey", product_info.drugName)
         let product = new product_model({
             drugname: product_info.drugName ,
             drugdescription: product_info.drugDescription,

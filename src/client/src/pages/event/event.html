@@ -45,22 +45,16 @@
         <span>{{scannedData.text}}</span>
       </div>
 <br/>
-
-
-    
 <h2 ion-text color="primary" align="center">Event Loaction Details</h2>
-
 <form (ngSubmit)="eventDetails()" text-wrap>
       <ion-grid>
-
         <ion-row>
         <ion-col col-6>
             <ion-item >
                 <ion-label floating style="font-size: 20px">Event Name</ion-label>
                 <ion-input type="text" [(ngModel)] = "eventName" name="eventName" [readonly]="isReadonly()"></ion-input>
             </ion-item>
-        </ion-col>
-            
+        </ion-col>           
         <ion-col col-6>
             <ion-item >
                 <ion-label floating style="font-size: 20px">Event Date</ion-label>
@@ -68,11 +62,8 @@
             </ion-item>
         </ion-col>
         </ion-row>
-    
     </ion-grid>
-        
         <ion-grid>
-
         <ion-row>
         <ion-col col-12>
             <ion-item >
@@ -93,13 +84,9 @@
         </ion-row>
     
     </ion-grid>
-
-    </form>    <br><br>
-    
+    </form><br><br>
 <!--     Autofiling the drug details form-->
-    <h2 ion-text color="primary" align ="center">Drug Information Form</h2>
-
-    
+    <h2 ion-text color="primary" align ="center">Drug Information Form</h2>    
      <form (ngSubmit)="drugData()" text-wrap >
       <ion-grid><ion-row>
         <ion-col col-12><ion-item>
@@ -107,14 +94,12 @@
         <ion-input type="text" [(ngModel)]="drugName" name="drugname"></ion-input>
       </ion-item></ion-col>
       </ion-row></ion-grid>
-         
       <ion-grid><ion-row>
         <ion-col col-12><ion-item>
         <ion-label floating style="font-size: 20px">Description</ion-label>
         <ion-textarea [(ngModel)]="drugDescription" name="description"></ion-textarea>
         </ion-item></ion-col>
       </ion-row></ion-grid>
-
         <ion-grid><ion-row>
         <ion-col col-12>
             <ion-item >
