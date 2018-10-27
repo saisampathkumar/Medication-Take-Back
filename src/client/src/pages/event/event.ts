@@ -75,55 +75,54 @@ export class EventPage {
   }
 
 detect(){
-if (this.myInput != ""){
-    this.url = 'http://127.0.0.1:3000/drug/search?searchtext='+this.myInput;
-     this.http.get(this.url)
-      .subscribe(
-        (res:any)=>{
-          this.result = res.data;
-          console.log(this.result)
-          if(this.result){
-            this.drugName = this.result[0].name?this.result[0].name:'';
-            this.drugDescription = this.result[0].description?this.result[0].description:'';
-            this.classificationClass = this.result[0].classification?(this.result[0].classification.class?this.result[0].classification.class:''):'';
-            this.classificationSubclass = this.result[0].classification?(this.result[0].classification.subclass?this.result[0].classification.subclass:''):'';
-            this.dosageForm = this.result[0].dosages?(this.result[0].dosages.dosage.form?this.result[0].dosages.dosage.form:''):'';
-            this.strength = this.result[0].dosages?(this.result[0].dosages.dosage.strength?this.result[0].dosages.dosage.strength:''):'';
-            this.absorption = this.result[0].absorption?this.result[0].absorption:'';
-          }        
-        }
-      )
-}
+  if (this.myInput != ""){
+      this.url = 'http://127.0.0.1:3000/drug/search?searchtext='+this.myInput;
+      this.http.get(this.url)
+        .subscribe(
+          (res:any)=>{
+            this.result = res.data;
+            console.log(this.result)
+            if(this.result){
+              this.drugName = this.result[0].name?this.result[0].name:'';
+              this.drugDescription = this.result[0].description?this.result[0].description:'';
+              this.classificationClass = this.result[0].classification?(this.result[0].classification.class?this.result[0].classification.class:''):'';
+              this.classificationSubclass = this.result[0].classification?(this.result[0].classification.subclass?this.result[0].classification.subclass:''):'';
+              this.dosageForm = this.result[0].dosages?(this.result[0].dosages.dosage.form?this.result[0].dosages.dosage.form:''):'';
+              this.strength = this.result[0].dosages?(this.result[0].dosages.dosage.strength?this.result[0].dosages.dosage.strength:''):'';
+              this.absorption = this.result[0].absorption?this.result[0].absorption:'';
+            }        
+          }
+        )
+  }
 }
 
 drugData(){
-if (this.myInput != "" && this.drugName !="" && this.drugDescription !="" ){
- this.url = 'http://127.0.0.1:3000/product/create';
-  this.http.post(this.url,{
-     drugName: this.drugName,
-     drugDescription: this.drugDescription,
-     classificationClass: this.classificationClass,
-     classificationSubclass: this.classificationSubclass,
-     dosageForm: this.dosageForm,
-     strength:   this.strength,
-     absorption: this.absorption,
-     quantityWhenNew: this.quantityWhenNew,
-     quantityCollected:this.quantityCollected,
-     eventName: this.eventName,
-     eventdate: this.eventDate,
-     eventaddress: this.eventaddress,
-     eventzipccode: this.eventzipcode
+  if (this.myInput != "" && this.drugName !="" && this.drugDescription !="" ){
+  this.url = 'http://127.0.0.1:3000/product/create';
+    this.http.post(this.url,
+      {
+      drugName: this.drugName,
+      drugDescription: this.drugDescription,
+      classificationClass: this.classificationClass,
+      classificationSubclass: this.classificationSubclass,
+      dosageForm: this.dosageForm,
+      strength:   this.strength,
+      absorption: this.absorption,
+      quantityWhenNew: this.quantityWhenNew,
+      quantityCollected:this.quantityCollected,
+      eventName: this.eventName,
+      eventdate: this.eventDate,
+      eventaddress: this.eventaddress,
+      eventzipccode: this.eventzipcode
 
-    }).subscribe(
-        (res:any)=>{
-        this.message = res.message;
-        alert(this.message);
-        }
-      )
+      }
+      ).subscribe(
+          (res:any)=>{
+          this.message = res.message;
+          alert(this.message);
+          }
+        )
+    }
   }
-
-//this.navCtrl.setRoot(this.navCtrl.getActive().component);
-
-}
 }
 
