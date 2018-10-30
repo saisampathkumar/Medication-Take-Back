@@ -32,7 +32,12 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 export const firebaseConfig =
 {
   // insert config here
-  
+  apiKey: "AIzaSyDd3opLmtAkQ08EPp2R5o2oIDE8DTMAPUU",
+  authDomain: "main-project-220501.firebaseapp.com",
+  databaseURL: "https://main-project-220501.firebaseio.com",
+  projectId: "main-project-220501",
+  storageBucket: "main-project-220501.appspot.com",
+  messagingSenderId: "850780385721"
 };
 
 @NgModule({

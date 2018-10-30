@@ -24,19 +24,16 @@ export class RegisterPage {
   
   register(){
     var validate = true
-
     if(this.emailId.value == "" || this.firstName.value == "" || this.lastName.value ==""|| this.pwd.value == "" || this.confirmPwd.value == "") 
     {
       alert("Fields should not be empty" )
       validate = false;
     }
-
     if(!(this.pwd.value == this.confirmPwd.value)) 
     {
       alert("Password Should Match" )
       validate = false;
     }
-
     if (validate == true){
       this.url = 'http://127.0.0.1:3000/users/create';
       this.firebase.auth.createUserWithEmailAndPassword(this.emailId.value, this.pwd.value).then(data =>{
@@ -54,8 +51,7 @@ export class RegisterPage {
           )
         }).catch(error =>{
           console.log("error in registration : ", error);
-        });
-      
+        }); 
     }
   }
   login(){
