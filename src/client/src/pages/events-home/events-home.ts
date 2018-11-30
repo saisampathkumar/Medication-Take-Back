@@ -43,11 +43,21 @@ export class EventsHomePage {
     });
   }
   loadevents(name:string){
-    this.url = 'http://127.0.0.1:3000/events/search/users?user=true&searchtext='+name;
+    this.url = '/events/search/users?user=true&searchtext='+name;
     this.http.get(this.url)
       .subscribe(
         (res:any)=>{
           this.result = res.data;
+        }
+      )
+  }
+  deleteEvent(_id:any){
+    this.url = '/events/delete?id='+_id;
+    this.http.delete(this.url)
+      .subscribe(
+        (res:any)=>{
+          this.loadevents(this.created_by);
+          alert(res.message);
         }
       )
   }
