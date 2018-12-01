@@ -48,7 +48,7 @@ toggleFirst() {
     })
   }
   loadevents(name:string){
-    this.url = 'http://127.0.0.1:3000/events/search/users?user=false&searchtext='+name;
+    this.url = '/events/search/users?user=false&searchtext='+name;
     this.http.get(this.url)
       .subscribe(
         (res:any)=>{

@@ -44,6 +44,12 @@
       <ion-label floating>ZIP</ion-label>
       <ion-input type="number" [(ngModel)]="address_zipcode"></ion-input>
     </ion-item>
+    <div *ngFor="let user of result">
+      <ion-item>
+          <ion-label>{{user.first_name}}</ion-label>
+          <ion-checkbox [(ngModel)]="user.check" (ionChange)="updateVolunteerList(user.check,user.email_id)"></ion-checkbox>
+        </ion-item>
+    </div>
   </ion-list>
   <br/>
   <br/>

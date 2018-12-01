@@ -2,6 +2,23 @@
 module.exports = function (app, db) {
     let users_model = db.model('users');
     let users_seq_model = db.model('users_seq');
+    //api to retrieve user details
+    app.get('/users',(req,res)=>{
+        users_model.find({}).exec((err, users) => {
+            if (!err) {
+                res.send({
+                    result: "Success",
+                    data: users
+                });
+            } else {
+                res.status(400).send({
+                    result: "Failure",
+                    message: "Error in fetching users list",
+                    error: err.message
+                });
+            }
+        });
+    });
     //api to search user details
     app.get('/users/search',(req,res)=>{
         let search_text = req.query.searchtext;
