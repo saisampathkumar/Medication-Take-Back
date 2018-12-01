@@ -4,7 +4,7 @@ import { NavController,NavParams  } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AngularFireAuth } from 'angularfire2/auth';
-import {BarcodeScanner,BarcodeScannerOptions} from '@ionic-native/barcode-scanner';
+import { BarcodeScanner,BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
 import { AlertController } from 'ionic-angular';
 
 
@@ -15,8 +15,8 @@ import { AlertController } from 'ionic-angular';
 export class EventPage {
 
   options: BarcodeScannerOptions;
-  encodeText: string='';
-  encodedData:any={};
+  // encodeText: string='';
+  // encodedData:any={};
   scannedData:any={};
 
   public eventId:Number;
@@ -39,7 +39,10 @@ export class EventPage {
   message: string;
   public created_by:string;
   constructor(public navCtrl: NavController, private alert: AlertController,
-    public scanner:BarcodeScanner  ,public params:NavParams,private afAuth: AngularFireAuth,private http: HttpClient) {
+    public scanner:BarcodeScanner  ,
+    public params:NavParams,
+    private afAuth: AngularFireAuth,
+    private http: HttpClient) {
     this.afAuth.authState.subscribe(user => {
       if(user) this.created_by = user.email;
       else this.created_by = 'admin';

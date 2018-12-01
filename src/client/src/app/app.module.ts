@@ -20,6 +20,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { DetailsPage } from '../pages/details/details';
 
 //firebase
 import { AngularFireAuthModule } from "angularfire2/auth";
@@ -49,6 +50,7 @@ export const firebaseConfig =
     RegisterPage,
     AboutPage,
     ChatPage,
+    DetailsPage,
     DialogUserComponent,
     EventsHomePage,
     EventsRegisterPage,
@@ -77,6 +79,7 @@ export const firebaseConfig =
     RegisterPage,
     AboutPage,
     ChatPage,
+    DetailsPage,
     DialogUserComponent,
     EventsHomePage,
     EventsRegisterPage,

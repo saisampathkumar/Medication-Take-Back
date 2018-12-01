@@ -6,6 +6,8 @@ import { EventPage } from '../event/event';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AngularFireAuth } from 'angularfire2/auth';
+import {DetailsPage} from '../details/details';
+
 @Component({
   selector: 'page-events-home',
   templateUrl: 'events-home.html',
@@ -34,6 +36,10 @@ export class EventsHomePage {
   joinEvent(){
     this.navCtrl.push(EventsJoinPage);
   }
+  details(ID:string){
+    this.navCtrl.push(DetailsPage,{
+      id:ID});
+  }
   event(ID:string,sdate:Date,adrsOne:string,zip:number){
     this.navCtrl.push(EventPage,{
       id:ID,
@@ -43,7 +49,7 @@ export class EventsHomePage {
     });
   }
   loadevents(name:string){
-    this.url = '/events/search/users?user=true&searchtext='+name;
+    this.url = 'http://127.0.0.1:3000/events/search/users?user=true&searchtext='+name;
     this.http.get(this.url)
       .subscribe(
         (res:any)=>{
@@ -52,7 +58,7 @@ export class EventsHomePage {
       )
   }
   deleteEvent(_id:any){
-    this.url = '/events/delete?id='+_id;
+    this.url = 'http://127.0.0.1:3000/events/delete?id='+_id;
     this.http.delete(this.url)
       .subscribe(
         (res:any)=>{
