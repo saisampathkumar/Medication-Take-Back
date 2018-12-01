@@ -27,7 +27,7 @@
     <ion-grid >
         <ion-row>
             <ion-col col-2>
-                <button   ion-button style="background-color: black"> <ion-icon style="font-size: 20px" ios="ios-barcode" md="md-barcode"></ion-icon></button>
+                <button ion-button style="background-color: black" (click)="scan()"> <ion-icon style="font-size: 20px" ios="ios-barcode" md="md-barcode"></ion-icon></button>
             </ion-col>
             <ion-col col-7 style="width:100%">
                 <ion-searchbar [(ngModel)]="myInput"></ion-searchbar>        

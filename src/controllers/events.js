@@ -1,6 +1,25 @@
 
 module.exports = function (app, db) {
     let events_model = db.model('events');
+    //api to retieve events details
+    app.get('/events',(req,res)=>{
+        let search_text = req.query.searchtext;
+        let query = {eventName:search_text};
+        events_model.find(query).exec((err, events) => {
+            if (!err) {
+                res.send({
+                    result: "Success",
+                    data: events
+                });
+            } else {
+                res.status(400).send({
+                    result: "Failure",
+                    message: "Error in fetching events list",
+                    error: err.message
+                });
+            }
+        });
+    });
     //api to search events details
     app.get('/events/search/users',(req,res)=>{
         let user = req.query.user;
