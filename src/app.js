@@ -34,6 +34,7 @@ app.use(cors());
 require('./controllers/drug')(app, db);
 require('./controllers/events')(app, db);
 require('./controllers/users')(app, db);
+require('./controllers/reports')(app, db);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
