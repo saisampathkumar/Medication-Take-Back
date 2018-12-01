@@ -30,6 +30,9 @@ import { AngularFireModule } from "angularfire2";
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { MaterialModule } from '../shared/material/material.module';
 import { SocketService } from '../shared/services/socket.service';
+
+//reports
+import { ChartsModule } from 'ng2-charts';
 // Initialize Firebase
 export const firebaseConfig =
 {
@@ -68,6 +71,7 @@ export const firebaseConfig =
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    ChartsModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],

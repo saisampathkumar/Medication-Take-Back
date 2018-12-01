@@ -12,7 +12,7 @@ const product_schema = new Schema({
     strength: String,
     absorption: String,
     quantityWhenNew: String,
-    quantityCollected: String,
+    quantityCollected: Number,
     eventName: String,
     eventDate: String,
     eventAddress: String,
