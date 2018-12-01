@@ -22,14 +22,30 @@ export class EventsRegisterPage {
   public created_by:string;
   public url:string;
   public message:Observable<any>;
+  public volunteers:Observable<any>;
+  public volunteerslist:string[];
   public userlist:string[];
+  
   constructor(public navCtrl: NavController,private http: HttpClient,private afAuth: AngularFireAuth) {
     this.afAuth.authState.subscribe(user => {
       if(user) this.created_by = user.email;
       else this.created_by = 'admin';
       this.userlist = [this.created_by];
+      this.loadvolunteers();
     })
   }
+  
+  loadvolunteers(){
+    this.url = 'http://127.0.0.1:3000/users';
+    this.http.get(this.url)
+      .subscribe(
+        (res:any)=>{
+          this.volunteers = res.data;
+          console.log(this.volunteers[0].first_name)
+        }
+      )
+  }
+  
   createEvent(){
     this.url = 'http://127.0.0.1:3000/event/create';
     this.http.post(this.url,{

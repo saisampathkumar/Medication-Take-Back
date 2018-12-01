@@ -43,7 +43,7 @@ export class EventsHomePage {
     });
   }
   loadevents(name:string){
-    this.url = '/events/search/users?user=true&searchtext='+name;
+    this.url = 'http://127.0.0.1:3000/events/search/users?user=true&searchtext='+name;
     this.http.get(this.url)
       .subscribe(
         (res:any)=>{

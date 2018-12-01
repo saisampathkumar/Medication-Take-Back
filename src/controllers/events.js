@@ -26,6 +26,25 @@ module.exports = function (app, db) {
             }
         });
     });
+
+    // //
+    // app.get('/events',(req,res)=>{
+    //     events_model.find({}).exec((err, events) => {
+    //         if (!err) {
+    //             res.send({
+    //                 result: "Success",
+    //                 data: events
+    //             });
+    //         } else {
+    //             res.status(400).send({
+    //                 result: "Failure",
+    //                 message: "Error in fetching events list",
+    //                 error: err.message
+    //             });
+    //         }
+    //     });
+    // });
+
     //api to create event details
     app.post('/event/create',(req,res) => {
         let events_info = req.body;
@@ -58,6 +77,8 @@ module.exports = function (app, db) {
             }
         })
     });
+
+    //
     //api to update event details
     app.put('/event/update/users',(req,res)=>{
         let events_info = req.body;

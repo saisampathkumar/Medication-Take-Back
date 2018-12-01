@@ -45,6 +45,7 @@
         "ionicons": "3.0.0",
         "karma-cli": "^1.0.1",
         "karma-coverage": "^1.1.2",
+        "mobiscroll-angular": "^4.0.0",
         "node-sass": "^4.9.3",
         "phonegap-plugin-barcodescanner": "8.0.0",
         "rxjs": "^6.3.3",

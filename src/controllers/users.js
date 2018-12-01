@@ -23,6 +23,25 @@ module.exports = function (app, db) {
             }
         });
     });
+
+    //api to get the users
+    app.get('/users',(req,res)=>{
+        users_model.find({}).exec((err, users) => {
+            if (!err) {
+                res.send({
+                    result: "Success",
+                    data: users
+                });
+            } else {
+                res.status(400).send({
+                    result: "Failure",
+                    message: "Error in fetching users list",
+                    error: err.message
+                });
+            }
+        });
+    });
+
     //api to create user details
     app.post('/users/create',(req,res) => {
         let users_info = req.body;
