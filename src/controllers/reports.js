@@ -58,7 +58,7 @@ module.exports = function (app, db) {
         }else if(name === "class"){
             var query = [
                 { $group:{
-                        _id:"$subclass",
+                        _id:"$class",
                         quantity:{$sum:1}
                     }
                 }

@@ -1,5 +1,5 @@
 import { NavController } from 'ionic-angular';
-import { Component, OnInit, ViewChildren, ViewChild, AfterViewInit, QueryList, ElementRef } from '@angular/core';
+import { Component, ViewChildren, ViewChild, QueryList, ElementRef } from '@angular/core';
 import { MatDialog, MatDialogRef, MatList, MatListItem } from '@angular/material';
 
 import { Action } from '../../shared/model/action';

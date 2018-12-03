@@ -1,4 +1,4 @@
-webpackJsonp([2],{
+webpackJsonp([3],{
 
 /***/ 100:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -6,9 +6,9 @@ webpackJsonp([2],{
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__register_register__ = __webpack_require__(206);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tabs_tabs__ = __webpack_require__(290);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__register_register__ = __webpack_require__(208);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tabs_tabs__ = __webpack_require__(291);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_auth__ = __webpack_require__(76);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_angularfire2_auth__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -77,15 +77,10 @@ var LoginPage = /** @class */ (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RegisterPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DetailsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login_login__ = __webpack_require__(100);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common_http__ = __webpack_require__(70);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_auth__ = __webpack_require__(76);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_angularfire2_auth__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angularfire2_database__ = __webpack_require__(326);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_angularfire2_database__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(59);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -98,79 +93,34 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
-//firebase
-
-
-var RegisterPage = /** @class */ (function () {
-    function RegisterPage(navCtrl, http, firebase, fireDatabase) {
+var DetailsPage = /** @class */ (function () {
+    function DetailsPage(navCtrl, params, http) {
         this.navCtrl = navCtrl;
+        this.params = params;
         this.http = http;
-        this.firebase = firebase;
-        this.fireDatabase = fireDatabase;
+        this.eventName = params.get('id');
+        this.loadevents(this.eventName);
     }
-    RegisterPage.prototype.register = function () {
+    DetailsPage.prototype.loadevents = function (name) {
         var _this = this;
-        var validate = true;
-        if (this.emailId.value == "" || this.firstName.value == "" || this.lastName.value == "" || this.pwd.value == "" || this.confirmPwd.value == "") {
-            alert("Fields should not be empty");
-            validate = false;
-        }
-        if (!(this.pwd.value == this.confirmPwd.value)) {
-            alert("Password Should Match");
-            validate = false;
-        }
-        if (validate == true) {
-            this.url = 'https://medication-take-back.herokuapp.com//users/create';
-            this.firebase.auth.createUserWithEmailAndPassword(this.emailId.value, this.pwd.value).then(function (data) {
-                console.log("Got data from Firebase: ", data);
-                _this.http.post(_this.url, {
-                    email: _this.emailId.value,
-                    firstName: _this.firstName.value,
-                    lastName: _this.lastName.value
-                }).subscribe(function (res) {
-                    _this.message = res.message;
-                    alert(_this.message);
-                    _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__login_login__["a" /* LoginPage */]);
-                });
-            }).catch(function (error) {
-                console.log("error in registration : ", error);
-            });
-        }
+        this.url = 'https://medication-take-back.herokuapp.com/events?searchtext=' + name;
+        console.log(this.url);
+        this.http.get(this.url)
+            .subscribe(function (res) {
+            console.log(res);
+            _this.result = res.data;
+        });
     };
-    RegisterPage.prototype.login = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__login_login__["a" /* LoginPage */]);
-    };
-    __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('username'),
-        __metadata("design:type", Object)
-    ], RegisterPage.prototype, "emailId", void 0);
-    __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('fname'),
-        __metadata("design:type", Object)
-    ], RegisterPage.prototype, "firstName", void 0);
-    __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('lname'),
-        __metadata("design:type", Object)
-    ], RegisterPage.prototype, "lastName", void 0);
-    __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('password'),
-        __metadata("design:type", Object)
-    ], RegisterPage.prototype, "pwd", void 0);
-    __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('confirmPwd'),
-        __metadata("design:type", Object)
-    ], RegisterPage.prototype, "confirmPwd", void 0);
-    RegisterPage = __decorate([
+    DetailsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-register',template:/*ion-inline-start:"E:\Repository\CS5551_WebKrakers_ProjectTeam1\src\client\src\pages\register\register.html"*/'<!--\n\n  Generated template for the RegisterPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>Register</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n     <ion-row class="logo-row">\n\n    <ion-col></ion-col>\n\n    <ion-col width-67>\n\n<img src="http://www.shim-icacs2018.org/key4register/images/client/592/images/Icones/signup-icon.png"/>    </ion-col>\n\n    <ion-col></ion-col>\n\n  </ion-row>\n\n  <div class="login-box">\n\n\n\n    <ion-list >\n\n            \n\n            <ion-item>\n\n              <ion-label floating>EMail Id</ion-label>\n\n              <ion-input  type="text"  #username ></ion-input>\n\n            </ion-item>\n\n            \n\n            <ion-item>\n\n              <ion-label floating>First Name</ion-label>\n\n              <ion-input  type="text" #fname ></ion-input>\n\n            </ion-item>\n\n            <ion-item>\n\n              <ion-label floating>Last Name</ion-label>\n\n              <ion-input  type="text" #lname ></ion-input>\n\n            </ion-item>\n\n        \n\n            <ion-item>\n\n              <ion-label floating>Password</ion-label>\n\n              <ion-input  type="password" #password ></ion-input>\n\n            </ion-item>\n\n        \n\n            <ion-item>\n\n              <ion-label floating>Confirm Password</ion-label>\n\n              <ion-input  type="password"  #confirmPwd ></ion-input>\n\n            </ion-item>\n\n          </ion-list>\n\n\n\n    </div>\n\n    <div id="homebuttons">\n\n\n\n    <button ion-button   type="submit" (click)="register()" round>Register</button>\n\n    <button ion-button   type="submit" (click)="login()" round>Login</button></div>\n\n\n\n\n\n\n\n<!--\n\n<div id="homebuttons">\n\n  <button  ion-button (click) = "register()">Register</button>\n\n\n\n</div>\n\n-->\n\n</ion-content>\n\n'/*ion-inline-end:"E:\Repository\CS5551_WebKrakers_ProjectTeam1\src\client\src\pages\register\register.html"*/,
+            selector: 'page-details',template:/*ion-inline-start:"E:\Repository\CS5551_WebKrakers_ProjectTeam1\src\client\src\pages\details\details.html"*/'<!--\n\n  Generated template for the DetailsPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>Event Details</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n  <!-- <button (click)="loadevents(\'Event A\')">\n\n    Get Details\n\n  </button>\n\n   <div *ngIf="event_obj.eventName">\n\n    <h2>{{event_obj.eventName}}</h2>\n\n    <p>{{event_obj.eventStartDate | date:\'short\'}}</p>\n\n</div> --> \n\n\n\n<div *ngFor="let event_obj of result" style="text-align: center">\n\n<!-- <h1>{{event_obj.eventName}}</h1>\n\n<br/>\n\n<h4>{{event_obj.eventStartDate | date:\'short\'}}</h4>\n\n<h4>{{event_obj.eventEndDate | date:\'short\'}}</h4>\n\n<h2>Address</h2>\n\n<h4>{{event_obj.address_one}}          {{event_obj.address_two}}</h4>\n\n<h4>{{event_obj.address_city}}          {{event_obj.address_state}}</h4> -->\n\n\n\n\n\n\n\n<ion-card>\n\n\n\n    <img src="https://images.pexels.com/photos/415825/pexels-photo-415825.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=350"/>\n\n\n\n    <ion-card-content>\n\n      <ion-card-title>\n\n          {{event_obj.eventName}}\n\n      </ion-card-title>\n\n      <p>\n\n       The main intention of this event is to collect the medication to save lifes from expired medicines. This event doesnot track any details of the individual. Event will be started at mentioned time there wont be any delay...................\n\n      </p>\n\n    </ion-card-content>\n\n\n\n    <ion-item>\n\n      <ion-icon name=\'clock\' item-start style="color: #d03e84"></ion-icon>\n\n      When\n\n      <ion-badge item-end>{{event_obj.eventStartDate | date:\'short\'}}</ion-badge>\n\n    </ion-item>\n\n\n\n    <ion-item>\n\n      <ion-icon name=\'navigate\' item-start style="color: #55acee"></ion-icon>\n\n      Where\n\n      <ion-badge item-end><p style="color: white">{{event_obj.address_one}} {{event_obj.address_two}} {{event_obj.address_city}} {{event_obj.address_state}}</p></ion-badge>\n\n    </ion-item>\n\n    <ion-item text-right>\n\n        <button ion-button clear small color="danger" icon-start >\n\n          <ion-icon name=\'share-alt\'></ion-icon>\n\n          Share\n\n        </button>\n\n      </ion-item>\n\n  </ion-card>\n\n</div>\n\n</ion-content>\n\n'/*ion-inline-end:"E:\Repository\CS5551_WebKrakers_ProjectTeam1\src\client\src\pages\details\details.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_4_angularfire2_auth__["AngularFireAuth"], __WEBPACK_IMPORTED_MODULE_5_angularfire2_database__["AngularFireDatabase"]])
-    ], RegisterPage);
-    return RegisterPage;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */]])
+    ], DetailsPage);
+    return DetailsPage;
 }());
 
-//# sourceMappingURL=register.js.map
+//# sourceMappingURL=details.js.map
 
 /***/ }),
 
@@ -180,8 +130,8 @@ var RegisterPage = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ReportsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(59);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -281,7 +231,108 @@ var ReportsPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 246:
+/***/ 208:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RegisterPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login_login__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common_http__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_auth__ = __webpack_require__(76);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_angularfire2_auth__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angularfire2_database__ = __webpack_require__(327);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_angularfire2_database__);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+//firebase
+
+
+var RegisterPage = /** @class */ (function () {
+    function RegisterPage(navCtrl, http, firebase, fireDatabase) {
+        this.navCtrl = navCtrl;
+        this.http = http;
+        this.firebase = firebase;
+        this.fireDatabase = fireDatabase;
+    }
+    RegisterPage.prototype.register = function () {
+        var _this = this;
+        var validate = true;
+        if (this.emailId.value == "" || this.firstName.value == "" || this.lastName.value == "" || this.pwd.value == "" || this.confirmPwd.value == "") {
+            alert("Fields should not be empty");
+            validate = false;
+        }
+        if (!(this.pwd.value == this.confirmPwd.value)) {
+            alert("Password Should Match");
+            validate = false;
+        }
+        if (validate == true) {
+            this.url = 'https://medication-take-back.herokuapp.com/users/create';
+            this.firebase.auth.createUserWithEmailAndPassword(this.emailId.value, this.pwd.value).then(function (data) {
+                console.log("Got data from Firebase: ", data);
+                _this.http.post(_this.url, {
+                    email: _this.emailId.value,
+                    firstName: _this.firstName.value,
+                    lastName: _this.lastName.value
+                }).subscribe(function (res) {
+                    _this.message = res.message;
+                    alert(_this.message);
+                    _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__login_login__["a" /* LoginPage */]);
+                });
+            }).catch(function (error) {
+                console.log("error in registration : ", error);
+            });
+        }
+    };
+    RegisterPage.prototype.login = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__login_login__["a" /* LoginPage */]);
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('username'),
+        __metadata("design:type", Object)
+    ], RegisterPage.prototype, "emailId", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('fname'),
+        __metadata("design:type", Object)
+    ], RegisterPage.prototype, "firstName", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('lname'),
+        __metadata("design:type", Object)
+    ], RegisterPage.prototype, "lastName", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('password'),
+        __metadata("design:type", Object)
+    ], RegisterPage.prototype, "pwd", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('confirmPwd'),
+        __metadata("design:type", Object)
+    ], RegisterPage.prototype, "confirmPwd", void 0);
+    RegisterPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'page-register',template:/*ion-inline-start:"E:\Repository\CS5551_WebKrakers_ProjectTeam1\src\client\src\pages\register\register.html"*/'<!--\n\n  Generated template for the RegisterPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>Register</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n     <ion-row class="logo-row">\n\n    <ion-col></ion-col>\n\n    <ion-col width-67>\n\n<img src="http://www.shim-icacs2018.org/key4register/images/client/592/images/Icones/signup-icon.png"/>    </ion-col>\n\n    <ion-col></ion-col>\n\n  </ion-row>\n\n  <div class="login-box">\n\n\n\n    <ion-list >\n\n            \n\n            <ion-item>\n\n              <ion-label floating>EMail Id</ion-label>\n\n              <ion-input  type="text"  #username ></ion-input>\n\n            </ion-item>\n\n            \n\n            <ion-item>\n\n              <ion-label floating>First Name</ion-label>\n\n              <ion-input  type="text" #fname ></ion-input>\n\n            </ion-item>\n\n            <ion-item>\n\n              <ion-label floating>Last Name</ion-label>\n\n              <ion-input  type="text" #lname ></ion-input>\n\n            </ion-item>\n\n        \n\n            <ion-item>\n\n              <ion-label floating>Password</ion-label>\n\n              <ion-input  type="password" #password ></ion-input>\n\n            </ion-item>\n\n        \n\n            <ion-item>\n\n              <ion-label floating>Confirm Password</ion-label>\n\n              <ion-input  type="password"  #confirmPwd ></ion-input>\n\n            </ion-item>\n\n          </ion-list>\n\n\n\n    </div>\n\n    <div id="homebuttons">\n\n\n\n    <button ion-button   type="submit" (click)="register()" round>Register</button>\n\n    <button ion-button   type="submit" (click)="login()" round>Login</button></div>\n\n\n\n\n\n\n\n<!--\n\n<div id="homebuttons">\n\n  <button  ion-button (click) = "register()">Register</button>\n\n\n\n</div>\n\n-->\n\n</ion-content>\n\n'/*ion-inline-end:"E:\Repository\CS5551_WebKrakers_ProjectTeam1\src\client\src\pages\register\register.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_4_angularfire2_auth__["AngularFireAuth"], __WEBPACK_IMPORTED_MODULE_5_angularfire2_database__["AngularFireDatabase"]])
+    ], RegisterPage);
+    return RegisterPage;
+}());
+
+//# sourceMappingURL=register.js.map
+
+/***/ }),
+
+/***/ 247:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -294,20 +345,24 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 246;
+webpackEmptyAsyncContext.id = 247;
 
 /***/ }),
 
-/***/ 289:
+/***/ 290:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
+	"../pages/details/details.module": [
+		841,
+		2
+	],
 	"../pages/register/register.module": [
-		840,
+		843,
 		1
 	],
 	"../pages/reports/reports.module": [
-		841,
+		842,
 		0
 	]
 };
@@ -322,22 +377,22 @@ function webpackAsyncContext(req) {
 webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 	return Object.keys(map);
 };
-webpackAsyncContext.id = 289;
+webpackAsyncContext.id = 290;
 module.exports = webpackAsyncContext;
 
 /***/ }),
 
-/***/ 290:
+/***/ 291:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TabsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__about_about__ = __webpack_require__(291);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__chat_chat__ = __webpack_require__(292);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__about_about__ = __webpack_require__(292);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__chat_chat__ = __webpack_require__(293);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__login_login__ = __webpack_require__(100);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__events_home_events_home__ = __webpack_require__(318);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__events_home_events_home__ = __webpack_require__(319);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__reports_reports__ = __webpack_require__(207);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -389,13 +444,13 @@ var TabsPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 291:
+/***/ 292:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AboutPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login_login__ = __webpack_require__(100);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -429,19 +484,19 @@ var AboutPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 292:
+/***/ 293:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ChatPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_material__ = __webpack_require__(171);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_model_action__ = __webpack_require__(723);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_model_event__ = __webpack_require__(724);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_services_socket_service__ = __webpack_require__(304);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__dialog_user_dialog_user_component__ = __webpack_require__(317);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__dialog_user_dialog_user_type__ = __webpack_require__(748);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_model_action__ = __webpack_require__(724);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_model_event__ = __webpack_require__(725);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_services_socket_service__ = __webpack_require__(305);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__dialog_user_dialog_user_component__ = __webpack_require__(318);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__dialog_user_dialog_user_type__ = __webpack_require__(749);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -597,7 +652,7 @@ var ChatPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 304:
+/***/ 305:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -605,7 +660,7 @@ var ChatPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_socket_io_client__ = __webpack_require__(725);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_socket_io_client__ = __webpack_require__(726);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_socket_io_client___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_socket_io_client__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -648,7 +703,7 @@ var SocketService = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 317:
+/***/ 318:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -701,19 +756,20 @@ var DialogUserComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 318:
+/***/ 319:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EventsHomePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__events_register_events_register__ = __webpack_require__(319);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__events_join_events_join__ = __webpack_require__(322);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__event_event__ = __webpack_require__(323);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_common_http__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__events_register_events_register__ = __webpack_require__(320);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__events_join_events_join__ = __webpack_require__(323);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__event_event__ = __webpack_require__(324);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_common_http__ = __webpack_require__(59);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_angularfire2_auth__ = __webpack_require__(76);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_angularfire2_auth__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__details_details__ = __webpack_require__(206);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -723,6 +779,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -754,6 +811,11 @@ var EventsHomePage = /** @class */ (function () {
     };
     EventsHomePage.prototype.joinEvent = function () {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__events_join_events_join__["a" /* EventsJoinPage */]);
+    };
+    EventsHomePage.prototype.details = function (ID) {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_7__details_details__["a" /* DetailsPage */], {
+            id: ID
+        });
     };
     EventsHomePage.prototype.event = function (ID, sdate, adrsOne, zip) {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__event_event__["a" /* EventPage */], {
@@ -788,7 +850,7 @@ var EventsHomePage = /** @class */ (function () {
     };
     EventsHomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-events-home',template:/*ion-inline-start:"E:\Repository\CS5551_WebKrakers_ProjectTeam1\src\client\src\pages\events-home\events-home.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>\n\n      Events\n\n    </ion-title>\n\n    <ion-buttons end>\n\n      <button ion-button clear icon-only (click)="refresh()">\n\n          <ion-icon name="addEvent" md="md-refresh"></ion-icon>\n\n        </button>\n\n      <button ion-button clear icon-only (click)="joinEvent()">\n\n        <ion-icon name="addEvent" md="md-add"></ion-icon> Join\n\n      </button>\n\n      <button ion-button clear icon-only (click)="addEvent()">\n\n        <ion-icon name="addEvent" md="md-add-circle"></ion-icon> Create\n\n      </button>\n\n    </ion-buttons>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content class="card-background-page" padding>\n\n\n\n  <div *ngFor="let event_obj of result" style="width:100%">\n\n  <ion-card  >\n\n      <ion-item>\n\n        <ion-avatar item-start>\n\n          <img src="https://www.aegon.co.uk/content/dam/ukpaw/advisers-login.svg">\n\n        </ion-avatar>\n\n        <h2>{{event_obj.eventName}}</h2>\n\n        <p>{{event_obj.eventStartDate | date:\'short\'}}</p>\n\n        <button *ngIf="created_by == event_obj.created_by" ion-button clear icon-only (click)="deleteEvent(event_obj.eventName)" item-end>\n\n          <ion-icon name="trash" md="md-trash"></ion-icon>\n\n        </button>\n\n      </ion-item>\n\n      <img (click)="event(event_obj.eventName,event_obj.eventStartDate,event_obj.address_city,event_obj.address_zipcode)" src="https://images.pexels.com/photos/415825/pexels-photo-415825.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=350">\n\n      <ion-card-content>\n\n        <p>\n\n        </p>\n\n      </ion-card-content>\n\n      <ion-row>\n\n        <ion-col >\n\n          <ion-item>\n\n            <button ion-button icon-start clear small >\n\n              <ion-icon name="chatbubbles"></ion-icon>\n\n              <div>chat</div>\n\n            </button>\n\n          </ion-item>\n\n        </ion-col>\n\n        <ion-col  >\n\n            <ion-item style="width:100%; float: right">\n\n              <button  ion-button icon-start clear small end>\n\n                <ion-icon name="more" ></ion-icon>\n\n                <p>details </p>\n\n              </button>\n\n          </ion-item>\n\n        </ion-col>\n\n      </ion-row>\n\n    </ion-card>\n\n    </div>\n\n</ion-content>\n\n'/*ion-inline-end:"E:\Repository\CS5551_WebKrakers_ProjectTeam1\src\client\src\pages\events-home\events-home.html"*/,
+            selector: 'page-events-home',template:/*ion-inline-start:"E:\Repository\CS5551_WebKrakers_ProjectTeam1\src\client\src\pages\events-home\events-home.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>\n\n      Events\n\n    </ion-title>\n\n    <ion-buttons end>\n\n      <button ion-button clear icon-only (click)="refresh()">\n\n          <ion-icon name="addEvent" md="md-refresh"></ion-icon>\n\n        </button>\n\n      <button ion-button clear icon-only (click)="joinEvent()">\n\n        <ion-icon name="addEvent" md="md-add"></ion-icon> Join\n\n      </button>\n\n      <button ion-button clear icon-only (click)="addEvent()">\n\n        <ion-icon name="addEvent" md="md-add-circle"></ion-icon> Create\n\n      </button>\n\n    </ion-buttons>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content class="card-background-page" padding>\n\n\n\n  <div *ngFor="let event_obj of result" style="width:100%">\n\n  <ion-card  >\n\n      <ion-item>\n\n        <ion-avatar item-start>\n\n          <img src="https://www.aegon.co.uk/content/dam/ukpaw/advisers-login.svg">\n\n        </ion-avatar>\n\n        <h2>{{event_obj.eventName}}</h2>\n\n        <p>{{event_obj.eventStartDate | date:\'short\'}}</p>\n\n        <button *ngIf="created_by == event_obj.created_by" ion-button clear icon-only (click)="deleteEvent(event_obj.eventName)" item-end>\n\n          <ion-icon name="trash" md="md-trash"></ion-icon>\n\n        </button>\n\n      </ion-item>\n\n      <img (click)="event(event_obj.eventName,event_obj.eventStartDate,event_obj.address_city,event_obj.address_zipcode)" src="https://images.pexels.com/photos/415825/pexels-photo-415825.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=350">\n\n      <ion-card-content>\n\n        <p>\n\n        </p>\n\n      </ion-card-content>\n\n      <ion-row>\n\n        <ion-col >\n\n          <ion-item>\n\n            <button ion-button icon-start clear small >\n\n              <ion-icon name="chatbubbles"></ion-icon>\n\n              <div>chat</div>\n\n            </button>\n\n          </ion-item>\n\n        </ion-col>\n\n        <ion-col  >\n\n            <ion-item style="width:100%; float: right">\n\n              <button  ion-button icon-start clear small end (click)="details(event_obj.eventName)">\n\n                <ion-icon name="more" ></ion-icon>\n\n                <div>details </div>\n\n              </button>\n\n          </ion-item>\n\n        </ion-col>\n\n      </ion-row>\n\n    </ion-card>\n\n    </div>\n\n</ion-content>\n\n'/*ion-inline-end:"E:\Repository\CS5551_WebKrakers_ProjectTeam1\src\client\src\pages\events-home\events-home.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_5__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_6_angularfire2_auth__["AngularFireAuth"]])
     ], EventsHomePage);
@@ -799,14 +861,14 @@ var EventsHomePage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 319:
+/***/ 320:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EventsRegisterPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(59);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__ = __webpack_require__(76);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -841,7 +903,7 @@ var EventsRegisterPage = /** @class */ (function () {
     }
     EventsRegisterPage.prototype.createEvent = function () {
         var _this = this;
-        this.url = 'https://medication-take-back.herokuapp.com//event/create';
+        this.url = 'https://medication-take-back.herokuapp.com/event/create';
         this.http.post(this.url, {
             eventName: this.eventName,
             eventStartDate: this.eventStartDate,
@@ -873,7 +935,7 @@ var EventsRegisterPage = /** @class */ (function () {
     };
     EventsRegisterPage.prototype.loadUsers = function () {
         var _this = this;
-        this.url = 'https://medication-take-back.herokuapp.com//users';
+        this.url = 'https://medication-take-back.herokuapp.com/users';
         this.http.get(this.url)
             .subscribe(function (res) {
             var resArray = res.data;
@@ -896,14 +958,14 @@ var EventsRegisterPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 322:
+/***/ 323:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EventsJoinPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(59);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__ = __webpack_require__(76);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -993,17 +1055,17 @@ var EventsJoinPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 323:
+/***/ 324:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EventPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(59);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__ = __webpack_require__(76);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_barcode_scanner__ = __webpack_require__(324);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_barcode_scanner__ = __webpack_require__(325);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1028,8 +1090,8 @@ var EventPage = /** @class */ (function () {
         this.params = params;
         this.afAuth = afAuth;
         this.http = http;
-        this.encodeText = '';
-        this.encodedData = {};
+        // encodeText: string='';
+        // encodedData:any={};
         this.scannedData = {};
         this.afAuth.authState.subscribe(function (user) {
             if (user)
@@ -1111,10 +1173,13 @@ var EventPage = /** @class */ (function () {
     };
     EventPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-event',template:/*ion-inline-start:"E:\Repository\CS5551_WebKrakers_ProjectTeam1\src\client\src\pages\event\event.html"*/'\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>Event</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n\n\n<!--\n\n    <img src="https://share.kaiserpermanente.org/wp-content/uploads/2017/10/drug-take-back-day-feature-548x336.jpg" style="width: 300px;height: 250px;"/><br/><br/>\n\n    <button  ion-button color="tertiary" (click)="Capture()">Take Picture</button>\n\n-->\n\n<ion-navbar>\n\n\n\n<!--\n\n    <ion-buttons end>\n\n    <button  ion-button color="tertiary" (click)="detect()">Search</button>\n\n         \n\n      </ion-buttons>\n\n-->\n\n    \n\n<div style="background-color: black">\n\n    <ion-grid >\n\n        <ion-row>\n\n            <ion-col col-2>\n\n                <button   ion-button style="background-color: black"> <ion-icon style="font-size: 20px" ios="ios-barcode" md="md-barcode"></ion-icon></button>\n\n            </ion-col>\n\n            <ion-col col-7 style="width:100%">\n\n                <ion-searchbar [(ngModel)]="myInput"></ion-searchbar>        \n\n            </ion-col>\n\n            <ion-col col-2 style="width: 90%">\n\n                    <button ion-button (click)="detect()" style="background-color: black"><p style="font-size: 15px" >Search</p></button>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-grid>\n\n</div>\n\n<br/>\n\n<div *ngIf="scannedData.text">\n\n        <label>Your barcode is</label>\n\n        <br/>\n\n        <span>{{scannedData.text}}</span>\n\n      </div>\n\n<br/>\n\n<h2 ion-text color="primary" align="center">Event Loaction Details</h2>\n\n<form (ngSubmit)="eventDetails()" text-wrap>\n\n      <ion-grid>\n\n        <ion-row>\n\n        <ion-col col-6>\n\n            <ion-item >\n\n                <ion-label floating style="font-size: 20px">Event Name</ion-label>\n\n                <ion-input type="text" [(ngModel)] = "eventName" name="eventName" [readonly]="isReadonly()"></ion-input>\n\n            </ion-item>\n\n        </ion-col>           \n\n        <ion-col col-6>\n\n            <ion-item >\n\n                <ion-label floating style="font-size: 20px">Event Date</ion-label>\n\n                <ion-input [(ngModel)]="eventDate" name="eventDate"></ion-input>\n\n            </ion-item>\n\n        </ion-col>\n\n        </ion-row>\n\n    </ion-grid>\n\n        <ion-grid>\n\n        <ion-row>\n\n        <ion-col col-12>\n\n            <ion-item >\n\n                <ion-label floating style="font-size: 20px">Event Address</ion-label>\n\n                <ion-input type="text" [(ngModel)]="eventaddress" name="eventaddress"></ion-input>\n\n            </ion-item>\n\n        </ion-col>\n\n        </ion-row>\n\n\n\n        <ion-row>\n\n            \n\n        <ion-col col-12>\n\n            <ion-item >\n\n                <ion-label floating style="font-size: 20px">Zipcode</ion-label>\n\n                <ion-input [(ngModel)]="eventzipcode" name="eventzipcode"></ion-input>\n\n            </ion-item>\n\n        </ion-col>\n\n        </ion-row>\n\n    \n\n    </ion-grid>\n\n    </form><br><br>\n\n<!--     Autofiling the drug details form-->\n\n    <h2 ion-text color="primary" align ="center">Drug Information Form</h2>    \n\n     <form (ngSubmit)="drugData()" text-wrap >\n\n      <ion-grid><ion-row>\n\n        <ion-col col-12><ion-item>\n\n        <ion-label floating style="font-size: 20px">Name of the Drug or Product</ion-label>\n\n        <ion-input type="text" [(ngModel)]="drugName" name="drugname"></ion-input>\n\n      </ion-item></ion-col>\n\n      </ion-row></ion-grid>\n\n      <ion-grid><ion-row>\n\n        <ion-col col-12><ion-item>\n\n        <ion-label floating style="font-size: 20px">Description</ion-label>\n\n        <ion-textarea [(ngModel)]="drugDescription" name="description"></ion-textarea>\n\n        </ion-item></ion-col>\n\n      </ion-row></ion-grid>\n\n        <ion-grid><ion-row>\n\n        <ion-col col-12>\n\n            <ion-item >\n\n                <ion-label floating style="font-size: 20px">Classification</ion-label>\n\n                <ion-input type="text" [(ngModel)]="classificationClass" name="class"></ion-input>\n\n            </ion-item>\n\n        </ion-col>\n\n            \n\n        <ion-col col-12>\n\n            <ion-item >\n\n                <ion-label floating style="font-size: 20px">Subclass</ion-label>\n\n                <ion-input [(ngModel)]="classificationSubclass" name="subclass"></ion-input>\n\n            </ion-item>\n\n        </ion-col>\n\n        </ion-row></ion-grid>  \n\n         \n\n        <ion-grid><ion-row>\n\n        <ion-col col-12>\n\n            <ion-item >\n\n                <ion-label floating style="font-size: 20px">Dosage Form</ion-label>\n\n                <ion-input type="text" [(ngModel)]="dosageForm" name="dosageform"></ion-input>\n\n            </ion-item>\n\n        </ion-col>\n\n            \n\n        <ion-col col-12>\n\n            <ion-item >\n\n                <ion-label floating style="font-size: 20px">Strength</ion-label>\n\n                <ion-input type="text" [(ngModel)]="strength" name="strength"></ion-input>\n\n            </ion-item>\n\n        </ion-col>\n\n        </ion-row></ion-grid>  \n\n         \n\n        <ion-grid><ion-row>\n\n        <ion-col col-12>\n\n            <ion-item >\n\n                <ion-label floating style="font-size: 20px">Absorption</ion-label>\n\n                <ion-input type="text" [(ngModel)]="absorption" name="absorption"></ion-input>\n\n            </ion-item>\n\n        </ion-col>\n\n       </ion-row></ion-grid>  \n\n         \n\n         <ion-grid><ion-row>\n\n        <ion-col col-12>\n\n            <ion-item >\n\n                <ion-label floating style="font-size: 20px">Quantity when container was new</ion-label>\n\n                <ion-input type="text" [(ngModel)]="quantityWhenNew" name="quantityWhenNew"></ion-input>\n\n            </ion-item>\n\n        </ion-col>\n\n        <ion-col col-12>\n\n            <ion-item >\n\n                <ion-label floating style="font-size: 20px">Quantity Collected</ion-label>\n\n                <ion-input type="text" [(ngModel)]="quantityCollected" name="quantityCollected"></ion-input>\n\n            </ion-item>\n\n        </ion-col>\n\n       </ion-row></ion-grid>  \n\n         \n\n       <div style="text-align: center">  \n\n      <button ion-button type="submit" round>Save</button>\n\n    </div>\n\n    </form>\n\n         \n\n</ion-navbar>\n\n    \n\n</ion-content>\n\n'/*ion-inline-end:"E:\Repository\CS5551_WebKrakers_ProjectTeam1\src\client\src\pages\event\event.html"*/,
+            selector: 'page-event',template:/*ion-inline-start:"E:\Repository\CS5551_WebKrakers_ProjectTeam1\src\client\src\pages\event\event.html"*/'\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>Event</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n\n\n<!--\n\n    <img src="https://share.kaiserpermanente.org/wp-content/uploads/2017/10/drug-take-back-day-feature-548x336.jpg" style="width: 300px;height: 250px;"/><br/><br/>\n\n    <button  ion-button color="tertiary" (click)="Capture()">Take Picture</button>\n\n-->\n\n<ion-navbar>\n\n\n\n<!--\n\n    <ion-buttons end>\n\n    <button  ion-button color="tertiary" (click)="detect()">Search</button>\n\n         \n\n      </ion-buttons>\n\n-->\n\n    \n\n<div style="background-color: black">\n\n    <ion-grid >\n\n        <ion-row>\n\n            <ion-col col-2>\n\n                <button ion-button style="background-color: black" (click)="scan()"> <ion-icon style="font-size: 20px" ios="ios-barcode" md="md-barcode"></ion-icon></button>\n\n            </ion-col>\n\n            <ion-col col-7 style="width:100%">\n\n                <ion-searchbar [(ngModel)]="myInput"></ion-searchbar>        \n\n            </ion-col>\n\n            <ion-col col-2 style="width: 90%">\n\n                    <button ion-button (click)="detect()" style="background-color: black"><p style="font-size: 15px" >Search</p></button>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-grid>\n\n</div>\n\n<br/>\n\n<div *ngIf="scannedData.text">\n\n        <label>Your barcode is</label>\n\n        <br/>\n\n        <span>{{scannedData.text}}</span>\n\n      </div>\n\n<br/>\n\n<h2 ion-text color="primary" align="center">Event Loaction Details</h2>\n\n<form (ngSubmit)="eventDetails()" text-wrap>\n\n      <ion-grid>\n\n        <ion-row>\n\n        <ion-col col-6>\n\n            <ion-item >\n\n                <ion-label floating style="font-size: 20px">Event Name</ion-label>\n\n                <ion-input type="text" [(ngModel)] = "eventName" name="eventName" [readonly]="isReadonly()"></ion-input>\n\n            </ion-item>\n\n        </ion-col>           \n\n        <ion-col col-6>\n\n            <ion-item >\n\n                <ion-label floating style="font-size: 20px">Event Date</ion-label>\n\n                <ion-input [(ngModel)]="eventDate" name="eventDate"></ion-input>\n\n            </ion-item>\n\n        </ion-col>\n\n        </ion-row>\n\n    </ion-grid>\n\n        <ion-grid>\n\n        <ion-row>\n\n        <ion-col col-12>\n\n            <ion-item >\n\n                <ion-label floating style="font-size: 20px">Event Address</ion-label>\n\n                <ion-input type="text" [(ngModel)]="eventaddress" name="eventaddress"></ion-input>\n\n            </ion-item>\n\n        </ion-col>\n\n        </ion-row>\n\n\n\n        <ion-row>\n\n            \n\n        <ion-col col-12>\n\n            <ion-item >\n\n                <ion-label floating style="font-size: 20px">Zipcode</ion-label>\n\n                <ion-input [(ngModel)]="eventzipcode" name="eventzipcode"></ion-input>\n\n            </ion-item>\n\n        </ion-col>\n\n        </ion-row>\n\n    \n\n    </ion-grid>\n\n    </form><br><br>\n\n<!--     Autofiling the drug details form-->\n\n    <h2 ion-text color="primary" align ="center">Drug Information Form</h2>    \n\n     <form (ngSubmit)="drugData()" text-wrap >\n\n      <ion-grid><ion-row>\n\n        <ion-col col-12><ion-item>\n\n        <ion-label floating style="font-size: 20px">Name of the Drug or Product</ion-label>\n\n        <ion-input type="text" [(ngModel)]="drugName" name="drugname"></ion-input>\n\n      </ion-item></ion-col>\n\n      </ion-row></ion-grid>\n\n      <ion-grid><ion-row>\n\n        <ion-col col-12><ion-item>\n\n        <ion-label floating style="font-size: 20px">Description</ion-label>\n\n        <ion-textarea [(ngModel)]="drugDescription" name="description"></ion-textarea>\n\n        </ion-item></ion-col>\n\n      </ion-row></ion-grid>\n\n        <ion-grid><ion-row>\n\n        <ion-col col-12>\n\n            <ion-item >\n\n                <ion-label floating style="font-size: 20px">Classification</ion-label>\n\n                <ion-input type="text" [(ngModel)]="classificationClass" name="class"></ion-input>\n\n            </ion-item>\n\n        </ion-col>\n\n            \n\n        <ion-col col-12>\n\n            <ion-item >\n\n                <ion-label floating style="font-size: 20px">Subclass</ion-label>\n\n                <ion-input [(ngModel)]="classificationSubclass" name="subclass"></ion-input>\n\n            </ion-item>\n\n        </ion-col>\n\n        </ion-row></ion-grid>  \n\n         \n\n        <ion-grid><ion-row>\n\n        <ion-col col-12>\n\n            <ion-item >\n\n                <ion-label floating style="font-size: 20px">Dosage Form</ion-label>\n\n                <ion-input type="text" [(ngModel)]="dosageForm" name="dosageform"></ion-input>\n\n            </ion-item>\n\n        </ion-col>\n\n            \n\n        <ion-col col-12>\n\n            <ion-item >\n\n                <ion-label floating style="font-size: 20px">Strength</ion-label>\n\n                <ion-input type="text" [(ngModel)]="strength" name="strength"></ion-input>\n\n            </ion-item>\n\n        </ion-col>\n\n        </ion-row></ion-grid>  \n\n         \n\n        <ion-grid><ion-row>\n\n        <ion-col col-12>\n\n            <ion-item >\n\n                <ion-label floating style="font-size: 20px">Absorption</ion-label>\n\n                <ion-input type="text" [(ngModel)]="absorption" name="absorption"></ion-input>\n\n            </ion-item>\n\n        </ion-col>\n\n       </ion-row></ion-grid>  \n\n         \n\n         <ion-grid><ion-row>\n\n        <ion-col col-12>\n\n            <ion-item >\n\n                <ion-label floating style="font-size: 20px">Quantity when container was new</ion-label>\n\n                <ion-input type="text" [(ngModel)]="quantityWhenNew" name="quantityWhenNew"></ion-input>\n\n            </ion-item>\n\n        </ion-col>\n\n        <ion-col col-12>\n\n            <ion-item >\n\n                <ion-label floating style="font-size: 20px">Quantity Collected</ion-label>\n\n                <ion-input type="text" [(ngModel)]="quantityCollected" name="quantityCollected"></ion-input>\n\n            </ion-item>\n\n        </ion-col>\n\n       </ion-row></ion-grid>  \n\n         \n\n       <div style="text-align: center">  \n\n      <button ion-button type="submit" round>Save</button>\n\n    </div>\n\n    </form>\n\n         \n\n</ion-navbar>\n\n    \n\n</ion-content>\n\n'/*ion-inline-end:"E:\Repository\CS5551_WebKrakers_ProjectTeam1\src\client\src\pages\event\event.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
-            __WEBPACK_IMPORTED_MODULE_4__ionic_native_barcode_scanner__["a" /* BarcodeScanner */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__["AngularFireAuth"], __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */]])
+            __WEBPACK_IMPORTED_MODULE_4__ionic_native_barcode_scanner__["a" /* BarcodeScanner */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__["AngularFireAuth"],
+            __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */]])
     ], EventPage);
     return EventPage;
 }());
@@ -1123,13 +1188,13 @@ var EventPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 507:
+/***/ 508:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(508);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(638);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(509);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(639);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -1137,51 +1202,53 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 638:
+/***/ 639:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* unused harmony export firebaseConfig */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mobiscroll_angular__ = __webpack_require__(506);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mobiscroll_angular__ = __webpack_require__(507);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser_animations__ = __webpack_require__(643);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ionic_angular__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(792);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_camera__ = __webpack_require__(793);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_about_about__ = __webpack_require__(291);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser_animations__ = __webpack_require__(644);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ionic_angular__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(793);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_camera__ = __webpack_require__(794);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_about_about__ = __webpack_require__(292);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_login_login__ = __webpack_require__(100);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_register_register__ = __webpack_require__(206);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_chat_chat__ = __webpack_require__(292);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_dialog_user_dialog_user_component__ = __webpack_require__(317);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_events_home_events_home__ = __webpack_require__(318);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_events_register_events_register__ = __webpack_require__(319);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_events_join_events_join__ = __webpack_require__(322);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_event_event__ = __webpack_require__(323);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_register_register__ = __webpack_require__(208);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_chat_chat__ = __webpack_require__(293);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_dialog_user_dialog_user_component__ = __webpack_require__(318);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_events_home_events_home__ = __webpack_require__(319);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_events_register_events_register__ = __webpack_require__(320);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_events_join_events_join__ = __webpack_require__(323);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_event_event__ = __webpack_require__(324);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_reports_reports__ = __webpack_require__(207);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_tabs_tabs__ = __webpack_require__(290);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ionic_native_status_bar__ = __webpack_require__(372);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__ionic_native_splash_screen__ = __webpack_require__(373);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_tabs_tabs__ = __webpack_require__(291);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ionic_native_status_bar__ = __webpack_require__(373);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__ionic_native_splash_screen__ = __webpack_require__(374);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__angular_forms__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__angular_common_http__ = __webpack_require__(70);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22_angularfire2_auth__ = __webpack_require__(76);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_22_angularfire2_auth__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23_angularfire2_database__ = __webpack_require__(326);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_23_angularfire2_database__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24_angularfire2__ = __webpack_require__(794);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24_angularfire2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_24_angularfire2__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__ionic_native_barcode_scanner__ = __webpack_require__(324);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__shared_material_material_module__ = __webpack_require__(795);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__shared_services_socket_service__ = __webpack_require__(304);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28_ng2_charts__ = __webpack_require__(796);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_28_ng2_charts__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__angular_common_http__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_details_details__ = __webpack_require__(206);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23_angularfire2_auth__ = __webpack_require__(76);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_23_angularfire2_auth__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24_angularfire2_database__ = __webpack_require__(327);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_24_angularfire2_database__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25_angularfire2__ = __webpack_require__(795);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25_angularfire2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_25_angularfire2__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__ionic_native_barcode_scanner__ = __webpack_require__(325);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__shared_material_material_module__ = __webpack_require__(796);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__shared_services_socket_service__ = __webpack_require__(305);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29_ng2_charts__ = __webpack_require__(797);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_29_ng2_charts__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -1235,6 +1302,7 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_9__pages_register_register__["a" /* RegisterPage */],
                 __WEBPACK_IMPORTED_MODULE_7__pages_about_about__["a" /* AboutPage */],
                 __WEBPACK_IMPORTED_MODULE_10__pages_chat_chat__["a" /* ChatPage */],
+                __WEBPACK_IMPORTED_MODULE_22__pages_details_details__["a" /* DetailsPage */],
                 __WEBPACK_IMPORTED_MODULE_11__pages_dialog_user_dialog_user_component__["a" /* DialogUserComponent */],
                 __WEBPACK_IMPORTED_MODULE_12__pages_events_home_events_home__["a" /* EventsHomePage */],
                 __WEBPACK_IMPORTED_MODULE_13__pages_events_register_events_register__["a" /* EventsRegisterPage */],
@@ -1249,16 +1317,17 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser_animations__["a" /* BrowserAnimationsModule */],
                 __WEBPACK_IMPORTED_MODULE_20__angular_forms__["d" /* FormsModule */],
                 __WEBPACK_IMPORTED_MODULE_20__angular_forms__["i" /* ReactiveFormsModule */],
-                __WEBPACK_IMPORTED_MODULE_26__shared_material_material_module__["a" /* MaterialModule */],
+                __WEBPACK_IMPORTED_MODULE_27__shared_material_material_module__["a" /* MaterialModule */],
                 __WEBPACK_IMPORTED_MODULE_21__angular_common_http__["b" /* HttpClientModule */],
-                __WEBPACK_IMPORTED_MODULE_24_angularfire2__["AngularFireModule"].initializeApp(firebaseConfig),
-                __WEBPACK_IMPORTED_MODULE_23_angularfire2_database__["AngularFireDatabaseModule"],
-                __WEBPACK_IMPORTED_MODULE_22_angularfire2_auth__["AngularFireAuthModule"],
-                __WEBPACK_IMPORTED_MODULE_28_ng2_charts__["ChartsModule"],
+                __WEBPACK_IMPORTED_MODULE_25_angularfire2__["AngularFireModule"].initializeApp(firebaseConfig),
+                __WEBPACK_IMPORTED_MODULE_24_angularfire2_database__["AngularFireDatabaseModule"],
+                __WEBPACK_IMPORTED_MODULE_23_angularfire2_auth__["AngularFireAuthModule"],
+                __WEBPACK_IMPORTED_MODULE_29_ng2_charts__["ChartsModule"],
                 __WEBPACK_IMPORTED_MODULE_4_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* MyApp */], {}, {
                     links: [
-                        { loadChildren: '../pages/register/register.module#RegisterPageModule', name: 'RegisterPage', segment: 'register', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/reports/reports.module#ReportsPageModule', name: 'ReportsPage', segment: 'reports', priority: 'low', defaultHistory: [] }
+                        { loadChildren: '../pages/details/details.module#DetailsPageModule', name: 'DetailsPage', segment: 'details', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/reports/reports.module#ReportsPageModule', name: 'ReportsPage', segment: 'reports', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/register/register.module#RegisterPageModule', name: 'RegisterPage', segment: 'register', priority: 'low', defaultHistory: [] }
                     ]
                 })
             ],
@@ -1269,6 +1338,7 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_9__pages_register_register__["a" /* RegisterPage */],
                 __WEBPACK_IMPORTED_MODULE_7__pages_about_about__["a" /* AboutPage */],
                 __WEBPACK_IMPORTED_MODULE_10__pages_chat_chat__["a" /* ChatPage */],
+                __WEBPACK_IMPORTED_MODULE_22__pages_details_details__["a" /* DetailsPage */],
                 __WEBPACK_IMPORTED_MODULE_11__pages_dialog_user_dialog_user_component__["a" /* DialogUserComponent */],
                 __WEBPACK_IMPORTED_MODULE_12__pages_events_home_events_home__["a" /* EventsHomePage */],
                 __WEBPACK_IMPORTED_MODULE_13__pages_events_register_events_register__["a" /* EventsRegisterPage */],
@@ -1281,8 +1351,8 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_18__ionic_native_status_bar__["a" /* StatusBar */],
                 __WEBPACK_IMPORTED_MODULE_19__ionic_native_splash_screen__["a" /* SplashScreen */],
                 __WEBPACK_IMPORTED_MODULE_6__ionic_native_camera__["a" /* Camera */],
-                __WEBPACK_IMPORTED_MODULE_27__shared_services_socket_service__["a" /* SocketService */],
-                __WEBPACK_IMPORTED_MODULE_25__ionic_native_barcode_scanner__["a" /* BarcodeScanner */],
+                __WEBPACK_IMPORTED_MODULE_28__shared_services_socket_service__["a" /* SocketService */],
+                __WEBPACK_IMPORTED_MODULE_26__ionic_native_barcode_scanner__["a" /* BarcodeScanner */],
                 { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["ErrorHandler"], useClass: __WEBPACK_IMPORTED_MODULE_4_ionic_angular__["c" /* IonicErrorHandler */] }
             ]
         })
@@ -1294,7 +1364,7 @@ var AppModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 723:
+/***/ 724:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1309,7 +1379,7 @@ var Action;
 
 /***/ }),
 
-/***/ 724:
+/***/ 725:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1323,14 +1393,14 @@ var Event;
 
 /***/ }),
 
-/***/ 745:
+/***/ 746:
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
 
-/***/ 748:
+/***/ 749:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1344,15 +1414,15 @@ var DialogUserType;
 
 /***/ }),
 
-/***/ 792:
+/***/ 793:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(372);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(373);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(373);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(374);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_login_login__ = __webpack_require__(100);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1368,6 +1438,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+//TO-DO delete after development import { TabsPage } from '../pages/tabs/tabs';
 var MyApp = /** @class */ (function () {
     function MyApp(platform, statusBar, splashScreen) {
         this.rootPage = __WEBPACK_IMPORTED_MODULE_4__pages_login_login__["a" /* LoginPage */];
@@ -1390,7 +1461,7 @@ var MyApp = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 795:
+/***/ 796:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1448,256 +1519,256 @@ var MaterialModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 821:
+/***/ 822:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./af": 383,
-	"./af.js": 383,
-	"./ar": 384,
-	"./ar-dz": 385,
-	"./ar-dz.js": 385,
-	"./ar-kw": 386,
-	"./ar-kw.js": 386,
-	"./ar-ly": 387,
-	"./ar-ly.js": 387,
-	"./ar-ma": 388,
-	"./ar-ma.js": 388,
-	"./ar-sa": 389,
-	"./ar-sa.js": 389,
-	"./ar-tn": 390,
-	"./ar-tn.js": 390,
-	"./ar.js": 384,
-	"./az": 391,
-	"./az.js": 391,
-	"./be": 392,
-	"./be.js": 392,
-	"./bg": 393,
-	"./bg.js": 393,
-	"./bm": 394,
-	"./bm.js": 394,
-	"./bn": 395,
-	"./bn.js": 395,
-	"./bo": 396,
-	"./bo.js": 396,
-	"./br": 397,
-	"./br.js": 397,
-	"./bs": 398,
-	"./bs.js": 398,
-	"./ca": 399,
-	"./ca.js": 399,
-	"./cs": 400,
-	"./cs.js": 400,
-	"./cv": 401,
-	"./cv.js": 401,
-	"./cy": 402,
-	"./cy.js": 402,
-	"./da": 403,
-	"./da.js": 403,
-	"./de": 404,
-	"./de-at": 405,
-	"./de-at.js": 405,
-	"./de-ch": 406,
-	"./de-ch.js": 406,
-	"./de.js": 404,
-	"./dv": 407,
-	"./dv.js": 407,
-	"./el": 408,
-	"./el.js": 408,
-	"./en-au": 409,
-	"./en-au.js": 409,
-	"./en-ca": 410,
-	"./en-ca.js": 410,
-	"./en-gb": 411,
-	"./en-gb.js": 411,
-	"./en-ie": 412,
-	"./en-ie.js": 412,
-	"./en-il": 413,
-	"./en-il.js": 413,
-	"./en-nz": 414,
-	"./en-nz.js": 414,
-	"./eo": 415,
-	"./eo.js": 415,
-	"./es": 416,
-	"./es-do": 417,
-	"./es-do.js": 417,
-	"./es-us": 418,
-	"./es-us.js": 418,
-	"./es.js": 416,
-	"./et": 419,
-	"./et.js": 419,
-	"./eu": 420,
-	"./eu.js": 420,
-	"./fa": 421,
-	"./fa.js": 421,
-	"./fi": 422,
-	"./fi.js": 422,
-	"./fo": 423,
-	"./fo.js": 423,
-	"./fr": 424,
-	"./fr-ca": 425,
-	"./fr-ca.js": 425,
-	"./fr-ch": 426,
-	"./fr-ch.js": 426,
-	"./fr.js": 424,
-	"./fy": 427,
-	"./fy.js": 427,
-	"./gd": 428,
-	"./gd.js": 428,
-	"./gl": 429,
-	"./gl.js": 429,
-	"./gom-latn": 430,
-	"./gom-latn.js": 430,
-	"./gu": 431,
-	"./gu.js": 431,
-	"./he": 432,
-	"./he.js": 432,
-	"./hi": 433,
-	"./hi.js": 433,
-	"./hr": 434,
-	"./hr.js": 434,
-	"./hu": 435,
-	"./hu.js": 435,
-	"./hy-am": 436,
-	"./hy-am.js": 436,
-	"./id": 437,
-	"./id.js": 437,
-	"./is": 438,
-	"./is.js": 438,
-	"./it": 439,
-	"./it.js": 439,
-	"./ja": 440,
-	"./ja.js": 440,
-	"./jv": 441,
-	"./jv.js": 441,
-	"./ka": 442,
-	"./ka.js": 442,
-	"./kk": 443,
-	"./kk.js": 443,
-	"./km": 444,
-	"./km.js": 444,
-	"./kn": 445,
-	"./kn.js": 445,
-	"./ko": 446,
-	"./ko.js": 446,
-	"./ky": 447,
-	"./ky.js": 447,
-	"./lb": 448,
-	"./lb.js": 448,
-	"./lo": 449,
-	"./lo.js": 449,
-	"./lt": 450,
-	"./lt.js": 450,
-	"./lv": 451,
-	"./lv.js": 451,
-	"./me": 452,
-	"./me.js": 452,
-	"./mi": 453,
-	"./mi.js": 453,
-	"./mk": 454,
-	"./mk.js": 454,
-	"./ml": 455,
-	"./ml.js": 455,
-	"./mn": 456,
-	"./mn.js": 456,
-	"./mr": 457,
-	"./mr.js": 457,
-	"./ms": 458,
-	"./ms-my": 459,
-	"./ms-my.js": 459,
-	"./ms.js": 458,
-	"./mt": 460,
-	"./mt.js": 460,
-	"./my": 461,
-	"./my.js": 461,
-	"./nb": 462,
-	"./nb.js": 462,
-	"./ne": 463,
-	"./ne.js": 463,
-	"./nl": 464,
-	"./nl-be": 465,
-	"./nl-be.js": 465,
-	"./nl.js": 464,
-	"./nn": 466,
-	"./nn.js": 466,
-	"./pa-in": 467,
-	"./pa-in.js": 467,
-	"./pl": 468,
-	"./pl.js": 468,
-	"./pt": 469,
-	"./pt-br": 470,
-	"./pt-br.js": 470,
-	"./pt.js": 469,
-	"./ro": 471,
-	"./ro.js": 471,
-	"./ru": 472,
-	"./ru.js": 472,
-	"./sd": 473,
-	"./sd.js": 473,
-	"./se": 474,
-	"./se.js": 474,
-	"./si": 475,
-	"./si.js": 475,
-	"./sk": 476,
-	"./sk.js": 476,
-	"./sl": 477,
-	"./sl.js": 477,
-	"./sq": 478,
-	"./sq.js": 478,
-	"./sr": 479,
-	"./sr-cyrl": 480,
-	"./sr-cyrl.js": 480,
-	"./sr.js": 479,
-	"./ss": 481,
-	"./ss.js": 481,
-	"./sv": 482,
-	"./sv.js": 482,
-	"./sw": 483,
-	"./sw.js": 483,
-	"./ta": 484,
-	"./ta.js": 484,
-	"./te": 485,
-	"./te.js": 485,
-	"./tet": 486,
-	"./tet.js": 486,
-	"./tg": 487,
-	"./tg.js": 487,
-	"./th": 488,
-	"./th.js": 488,
-	"./tl-ph": 489,
-	"./tl-ph.js": 489,
-	"./tlh": 490,
-	"./tlh.js": 490,
-	"./tr": 491,
-	"./tr.js": 491,
-	"./tzl": 492,
-	"./tzl.js": 492,
-	"./tzm": 493,
-	"./tzm-latn": 494,
-	"./tzm-latn.js": 494,
-	"./tzm.js": 493,
-	"./ug-cn": 495,
-	"./ug-cn.js": 495,
-	"./uk": 496,
-	"./uk.js": 496,
-	"./ur": 497,
-	"./ur.js": 497,
-	"./uz": 498,
-	"./uz-latn": 499,
-	"./uz-latn.js": 499,
-	"./uz.js": 498,
-	"./vi": 500,
-	"./vi.js": 500,
-	"./x-pseudo": 501,
-	"./x-pseudo.js": 501,
-	"./yo": 502,
-	"./yo.js": 502,
-	"./zh-cn": 503,
-	"./zh-cn.js": 503,
-	"./zh-hk": 504,
-	"./zh-hk.js": 504,
-	"./zh-tw": 505,
-	"./zh-tw.js": 505
+	"./af": 384,
+	"./af.js": 384,
+	"./ar": 385,
+	"./ar-dz": 386,
+	"./ar-dz.js": 386,
+	"./ar-kw": 387,
+	"./ar-kw.js": 387,
+	"./ar-ly": 388,
+	"./ar-ly.js": 388,
+	"./ar-ma": 389,
+	"./ar-ma.js": 389,
+	"./ar-sa": 390,
+	"./ar-sa.js": 390,
+	"./ar-tn": 391,
+	"./ar-tn.js": 391,
+	"./ar.js": 385,
+	"./az": 392,
+	"./az.js": 392,
+	"./be": 393,
+	"./be.js": 393,
+	"./bg": 394,
+	"./bg.js": 394,
+	"./bm": 395,
+	"./bm.js": 395,
+	"./bn": 396,
+	"./bn.js": 396,
+	"./bo": 397,
+	"./bo.js": 397,
+	"./br": 398,
+	"./br.js": 398,
+	"./bs": 399,
+	"./bs.js": 399,
+	"./ca": 400,
+	"./ca.js": 400,
+	"./cs": 401,
+	"./cs.js": 401,
+	"./cv": 402,
+	"./cv.js": 402,
+	"./cy": 403,
+	"./cy.js": 403,
+	"./da": 404,
+	"./da.js": 404,
+	"./de": 405,
+	"./de-at": 406,
+	"./de-at.js": 406,
+	"./de-ch": 407,
+	"./de-ch.js": 407,
+	"./de.js": 405,
+	"./dv": 408,
+	"./dv.js": 408,
+	"./el": 409,
+	"./el.js": 409,
+	"./en-au": 410,
+	"./en-au.js": 410,
+	"./en-ca": 411,
+	"./en-ca.js": 411,
+	"./en-gb": 412,
+	"./en-gb.js": 412,
+	"./en-ie": 413,
+	"./en-ie.js": 413,
+	"./en-il": 414,
+	"./en-il.js": 414,
+	"./en-nz": 415,
+	"./en-nz.js": 415,
+	"./eo": 416,
+	"./eo.js": 416,
+	"./es": 417,
+	"./es-do": 418,
+	"./es-do.js": 418,
+	"./es-us": 419,
+	"./es-us.js": 419,
+	"./es.js": 417,
+	"./et": 420,
+	"./et.js": 420,
+	"./eu": 421,
+	"./eu.js": 421,
+	"./fa": 422,
+	"./fa.js": 422,
+	"./fi": 423,
+	"./fi.js": 423,
+	"./fo": 424,
+	"./fo.js": 424,
+	"./fr": 425,
+	"./fr-ca": 426,
+	"./fr-ca.js": 426,
+	"./fr-ch": 427,
+	"./fr-ch.js": 427,
+	"./fr.js": 425,
+	"./fy": 428,
+	"./fy.js": 428,
+	"./gd": 429,
+	"./gd.js": 429,
+	"./gl": 430,
+	"./gl.js": 430,
+	"./gom-latn": 431,
+	"./gom-latn.js": 431,
+	"./gu": 432,
+	"./gu.js": 432,
+	"./he": 433,
+	"./he.js": 433,
+	"./hi": 434,
+	"./hi.js": 434,
+	"./hr": 435,
+	"./hr.js": 435,
+	"./hu": 436,
+	"./hu.js": 436,
+	"./hy-am": 437,
+	"./hy-am.js": 437,
+	"./id": 438,
+	"./id.js": 438,
+	"./is": 439,
+	"./is.js": 439,
+	"./it": 440,
+	"./it.js": 440,
+	"./ja": 441,
+	"./ja.js": 441,
+	"./jv": 442,
+	"./jv.js": 442,
+	"./ka": 443,
+	"./ka.js": 443,
+	"./kk": 444,
+	"./kk.js": 444,
+	"./km": 445,
+	"./km.js": 445,
+	"./kn": 446,
+	"./kn.js": 446,
+	"./ko": 447,
+	"./ko.js": 447,
+	"./ky": 448,
+	"./ky.js": 448,
+	"./lb": 449,
+	"./lb.js": 449,
+	"./lo": 450,
+	"./lo.js": 450,
+	"./lt": 451,
+	"./lt.js": 451,
+	"./lv": 452,
+	"./lv.js": 452,
+	"./me": 453,
+	"./me.js": 453,
+	"./mi": 454,
+	"./mi.js": 454,
+	"./mk": 455,
+	"./mk.js": 455,
+	"./ml": 456,
+	"./ml.js": 456,
+	"./mn": 457,
+	"./mn.js": 457,
+	"./mr": 458,
+	"./mr.js": 458,
+	"./ms": 459,
+	"./ms-my": 460,
+	"./ms-my.js": 460,
+	"./ms.js": 459,
+	"./mt": 461,
+	"./mt.js": 461,
+	"./my": 462,
+	"./my.js": 462,
+	"./nb": 463,
+	"./nb.js": 463,
+	"./ne": 464,
+	"./ne.js": 464,
+	"./nl": 465,
+	"./nl-be": 466,
+	"./nl-be.js": 466,
+	"./nl.js": 465,
+	"./nn": 467,
+	"./nn.js": 467,
+	"./pa-in": 468,
+	"./pa-in.js": 468,
+	"./pl": 469,
+	"./pl.js": 469,
+	"./pt": 470,
+	"./pt-br": 471,
+	"./pt-br.js": 471,
+	"./pt.js": 470,
+	"./ro": 472,
+	"./ro.js": 472,
+	"./ru": 473,
+	"./ru.js": 473,
+	"./sd": 474,
+	"./sd.js": 474,
+	"./se": 475,
+	"./se.js": 475,
+	"./si": 476,
+	"./si.js": 476,
+	"./sk": 477,
+	"./sk.js": 477,
+	"./sl": 478,
+	"./sl.js": 478,
+	"./sq": 479,
+	"./sq.js": 479,
+	"./sr": 480,
+	"./sr-cyrl": 481,
+	"./sr-cyrl.js": 481,
+	"./sr.js": 480,
+	"./ss": 482,
+	"./ss.js": 482,
+	"./sv": 483,
+	"./sv.js": 483,
+	"./sw": 484,
+	"./sw.js": 484,
+	"./ta": 485,
+	"./ta.js": 485,
+	"./te": 486,
+	"./te.js": 486,
+	"./tet": 487,
+	"./tet.js": 487,
+	"./tg": 488,
+	"./tg.js": 488,
+	"./th": 489,
+	"./th.js": 489,
+	"./tl-ph": 490,
+	"./tl-ph.js": 490,
+	"./tlh": 491,
+	"./tlh.js": 491,
+	"./tr": 492,
+	"./tr.js": 492,
+	"./tzl": 493,
+	"./tzl.js": 493,
+	"./tzm": 494,
+	"./tzm-latn": 495,
+	"./tzm-latn.js": 495,
+	"./tzm.js": 494,
+	"./ug-cn": 496,
+	"./ug-cn.js": 496,
+	"./uk": 497,
+	"./uk.js": 497,
+	"./ur": 498,
+	"./ur.js": 498,
+	"./uz": 499,
+	"./uz-latn": 500,
+	"./uz-latn.js": 500,
+	"./uz.js": 499,
+	"./vi": 501,
+	"./vi.js": 501,
+	"./x-pseudo": 502,
+	"./x-pseudo.js": 502,
+	"./yo": 503,
+	"./yo.js": 503,
+	"./zh-cn": 504,
+	"./zh-cn.js": 504,
+	"./zh-hk": 505,
+	"./zh-hk.js": 505,
+	"./zh-tw": 506,
+	"./zh-tw.js": 506
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -1713,9 +1784,9 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 821;
+webpackContext.id = 822;
 
 /***/ })
 
-},[507]);
+},[508]);
 //# sourceMappingURL=main.js.map

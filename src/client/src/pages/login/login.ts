@@ -4,7 +4,6 @@ import {RegisterPage} from '../register/register'
 import {TabsPage} from '../tabs/tabs'
 //authDomain
 import { AngularFireAuth } from "angularfire2/auth";
-import { auth } from 'firebase/app';
 
 @Component({
   selector: 'page-login',
