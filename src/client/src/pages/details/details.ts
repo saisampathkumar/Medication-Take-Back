@@ -22,7 +22,7 @@ export class DetailsPage {
   }
 
   loadevents(name:string){
-    this.url = 'http://127.0.0.1:3000/events?searchtext='+name;
+    this.url = 'https://medication-take-back.herokuapp.com/events?searchtext='+name;
     console.log(this.url);
     this.http.get(this.url)
       .subscribe(

@@ -79,7 +79,7 @@ export class EventPage {
 
 detect(){
   if (this.myInput != ""){
-      this.url = '/drug/search?searchtext='+this.myInput;
+      this.url = 'https://medication-take-back.herokuapp.com/drug/search?searchtext='+this.myInput;
       this.http.get(this.url)
         .subscribe(
           (res:any)=>{
@@ -101,7 +101,7 @@ detect(){
 
 drugData(){
   if (this.myInput != "" && this.drugName !="" && this.drugDescription !="" ){
-  this.url = '/product/create';
+  this.url = 'https://medication-take-back.herokuapp.com/product/create';
     this.http.post(this.url,
       {
       drugName: this.drugName,

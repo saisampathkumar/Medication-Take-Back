@@ -121,7 +121,7 @@ var RegisterPage = /** @class */ (function () {
             validate = false;
         }
         if (validate == true) {
-            this.url = '/users/create';
+            this.url = 'https://medication-take-back.herokuapp.com//users/create';
             this.firebase.auth.createUserWithEmailAndPassword(this.emailId.value, this.pwd.value).then(function (data) {
                 console.log("Got data from Firebase: ", data);
                 _this.http.post(_this.url, {
@@ -222,7 +222,7 @@ var ReportsPage = /** @class */ (function () {
     //methods to load data to graph
     ReportsPage.prototype.loadByPlace = function () {
         var _this = this;
-        this.url = '/reports/barchart?name=place';
+        this.url = 'https://medication-take-back.herokuapp.com/reports/barchart?name=place';
         this.http.get(this.url)
             .subscribe(function (res) {
             _this.result = res.data;
@@ -234,7 +234,7 @@ var ReportsPage = /** @class */ (function () {
     };
     ReportsPage.prototype.loadByEvents = function () {
         var _this = this;
-        this.url = '/reports/barchart?name=event';
+        this.url = 'https://medication-take-back.herokuapp.com/reports/barchart?name=event';
         this.http.get(this.url)
             .subscribe(function (res) {
             _this.result = res.data;
@@ -246,7 +246,7 @@ var ReportsPage = /** @class */ (function () {
     };
     ReportsPage.prototype.loadByName = function () {
         var _this = this;
-        this.url = '/reports/piechart?name=name';
+        this.url = 'https://medication-take-back.herokuapp.com/reports/piechart?name=name';
         this.http.get(this.url)
             .subscribe(function (res) {
             _this.result = res.data;
@@ -258,7 +258,7 @@ var ReportsPage = /** @class */ (function () {
     };
     ReportsPage.prototype.loadByClass = function () {
         var _this = this;
-        this.url = '/reports/piechart?name=class';
+        this.url = 'https://medication-take-back.herokuapp.com/reports/piechart?name=class';
         this.http.get(this.url)
             .subscribe(function (res) {
             _this.result = res.data;
@@ -616,7 +616,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var SERVER_URL = 'http://localhost:3000';
+var SERVER_URL = 'https://medication-take-back.herokuapp.com';
 var SocketService = /** @class */ (function () {
     function SocketService() {
     }
@@ -765,7 +765,7 @@ var EventsHomePage = /** @class */ (function () {
     };
     EventsHomePage.prototype.loadevents = function (name) {
         var _this = this;
-        this.url = '/events/search/users?user=true&searchtext=' + name;
+        this.url = 'https://medication-take-back.herokuapp.com/events/search/users?user=true&searchtext=' + name;
         this.http.get(this.url)
             .subscribe(function (res) {
             _this.result = res.data;
@@ -773,7 +773,7 @@ var EventsHomePage = /** @class */ (function () {
     };
     EventsHomePage.prototype.deleteEvent = function (_id) {
         var _this = this;
-        this.url = '/events/delete?id=' + _id;
+        this.url = 'https://medication-take-back.herokuapp.com/events/delete?id=' + _id;
         this.http.delete(this.url)
             .subscribe(function (res) {
             _this.loadevents(_this.created_by);
@@ -841,7 +841,7 @@ var EventsRegisterPage = /** @class */ (function () {
     }
     EventsRegisterPage.prototype.createEvent = function () {
         var _this = this;
-        this.url = 'http://127.0.0.1:3000/event/create';
+        this.url = 'https://medication-take-back.herokuapp.com//event/create';
         this.http.post(this.url, {
             eventName: this.eventName,
             eventStartDate: this.eventStartDate,
@@ -873,7 +873,7 @@ var EventsRegisterPage = /** @class */ (function () {
     };
     EventsRegisterPage.prototype.loadUsers = function () {
         var _this = this;
-        this.url = 'http://127.0.0.1:3000/users';
+        this.url = 'https://medication-take-back.herokuapp.com//users';
         this.http.get(this.url)
             .subscribe(function (res) {
             var resArray = res.data;
@@ -948,7 +948,7 @@ var EventsJoinPage = /** @class */ (function () {
     };
     EventsJoinPage.prototype.loadevents = function (name) {
         var _this = this;
-        this.url = '/events/search/users?user=false&searchtext=' + name;
+        this.url = 'https://medication-take-back.herokuapp.com/events/search/users?user=false&searchtext=' + name;
         this.http.get(this.url)
             .subscribe(function (res) {
             _this.result = res.data;
@@ -957,7 +957,7 @@ var EventsJoinPage = /** @class */ (function () {
     };
     EventsJoinPage.prototype.joinTheEvent = function (name) {
         var _this = this;
-        this.url = 'http://127.0.0.1:3000/event/update/users';
+        this.url = 'https://medication-take-back.herokuapp.com/event/update/users';
         this.http.put(this.url, {
             event_name: name,
             user: this.created_by
@@ -1068,7 +1068,7 @@ var EventPage = /** @class */ (function () {
     EventPage.prototype.detect = function () {
         var _this = this;
         if (this.myInput != "") {
-            this.url = '/drug/search?searchtext=' + this.myInput;
+            this.url = 'https://medication-take-back.herokuapp.com/drug/search?searchtext=' + this.myInput;
             this.http.get(this.url)
                 .subscribe(function (res) {
                 _this.result = res.data;
@@ -1088,7 +1088,7 @@ var EventPage = /** @class */ (function () {
     EventPage.prototype.drugData = function () {
         var _this = this;
         if (this.myInput != "" && this.drugName != "" && this.drugDescription != "") {
-            this.url = '/product/create';
+            this.url = 'https://medication-take-back.herokuapp.com/product/create';
             this.http.post(this.url, {
                 drugName: this.drugName,
                 drugDescription: this.drugDescription,

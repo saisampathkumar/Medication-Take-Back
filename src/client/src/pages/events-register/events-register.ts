@@ -34,7 +34,7 @@ export class EventsRegisterPage {
     })
   }
   createEvent(){
-    this.url = 'http://127.0.0.1:3000/event/create';
+    this.url = 'https://medication-take-back.herokuapp.com/event/create';
     this.http.post(this.url,{
       eventName:this.eventName,
       eventStartDate:this.eventStartDate,
@@ -66,7 +66,7 @@ export class EventsRegisterPage {
     }
   }
   loadUsers(){
-    this.url = 'http://127.0.0.1:3000/users';
+    this.url = 'https://medication-take-back.herokuapp.com/users';
     this.http.get(this.url)
       .subscribe(
         (res:any)=>{

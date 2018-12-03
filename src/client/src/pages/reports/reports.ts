@@ -38,7 +38,7 @@ export class ReportsPage {
   }
   //methods to load data to graph
   public loadByPlace():void{
-    this.url = '/reports/barchart?name=place';
+    this.url = 'https://medication-take-back.herokuapp.com/reports/barchart?name=place';
     this.http.get(this.url)
       .subscribe(
         (res:any)=>{
@@ -51,7 +51,7 @@ export class ReportsPage {
       )
   }
   public loadByEvents():void {
-    this.url = '/reports/barchart?name=event';
+    this.url = 'https://medication-take-back.herokuapp.com/reports/barchart?name=event';
     this.http.get(this.url)
       .subscribe(
         (res:any)=>{
@@ -64,7 +64,7 @@ export class ReportsPage {
       )
   }
   public loadByName():void {
-    this.url = '/reports/piechart?name=name';
+    this.url = 'https://medication-take-back.herokuapp.com/reports/piechart?name=name';
     this.http.get(this.url)
       .subscribe(
         (res:any)=>{
@@ -77,7 +77,7 @@ export class ReportsPage {
       )
   }
   public loadByClass():void {
-    this.url = '/reports/piechart?name=class';
+    this.url = 'https://medication-take-back.herokuapp.com/reports/piechart?name=class';
     this.http.get(this.url)
       .subscribe(
         (res:any)=>{
