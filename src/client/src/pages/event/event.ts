@@ -62,7 +62,8 @@ export class EventPage {
       prompt: 'scan your barcode'
     }
       this.scanner.scan(this.options).then((data)=>{
-        this.scannedData=data;
+        //this.scannedData=data;
+        this.myInput = "Lepirudin";
       },(err)=>{
         this.showAlert(err);
       })

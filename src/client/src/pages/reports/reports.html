@@ -40,6 +40,29 @@
           </ion-row>
     </ion-card>
     <ion-card>
+      <ion-card-content>
+        <div>
+            <div style="display: block">
+              <canvas baseChart
+                      [datasets]="doughnutChartData"
+                      [labels]="doughnutChartLabels"
+                      [chartType]="doughnutChartType"
+                      (chartHover)="chartHovered($event)"
+                      (chartClick)="chartClicked($event)"></canvas>
+            </div>
+          </div>
+      </ion-card-content>
+      <ion-row>
+          <ion-col *ngFor="let place of distinct">
+            <ion-item>
+              <button ion-button icon-start clear small (click)="loadByNutPlace(place)">
+                <div>{{place}}</div>
+              </button>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+  </ion-card>
+    <ion-card>
         <ion-card-content>
           <div>
               <div style="display: block">
@@ -69,4 +92,5 @@
             </ion-col>
           </ion-row>
     </ion-card>
+    
 </ion-content>

@@ -24,10 +24,17 @@ export class ReportsPage {
   public pieChartLabels:string[];
   public pieChartData:any[] = [{data: []}];
   public pieChartType:string = 'pie';
+  //doughnut chart
+  public doughnutChartLabels:string[];
+  public doughnutChartData:any[] = [{data: []}];
+  public doughnutChartType:string = 'doughnut';
+  //distinct
+  public distinct:Observable<any>;
   
   constructor(public navCtrl: NavController, public navParams: NavParams,private http: HttpClient) {
     this.loadByPlace();
     this.loadByName();
+    this.loadByDistinct();
   }
   // events
   public chartClicked(e:any):void {
@@ -86,6 +93,29 @@ export class ReportsPage {
           let clone = JSON.parse(JSON.stringify(this.result));
           this.pieChartLabels = clone.labels;
           this.pieChartData[0].data = clone.values;
+        }
+      )
+  }
+  public loadByDistinct():void {
+    this.url = 'https://medication-take-back.herokuapp.com/reports/doughnut?queryon=distinct';
+    this.http.get(this.url)
+      .subscribe(
+        (res:any)=>{
+          this.distinct = res.data;
+          this.loadByNutPlace(this.distinct[0]);
+        }
+      )
+  }
+  public loadByNutPlace(place:string):void {
+    this.url = 'https://medication-take-back.herokuapp.com/reports/doughnut?queryon=city&queryvalue='+place;
+    this.http.get(this.url)
+      .subscribe(
+        (res:any)=>{
+          this.result = res.data;
+          console.log(this.result);
+          let clone = JSON.parse(JSON.stringify(this.result));
+          this.doughnutChartLabels = clone.labels;
+          this.doughnutChartData[0].data = clone.values;
         }
       )
   }
